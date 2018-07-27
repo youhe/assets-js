@@ -125,38 +125,42 @@ class UserAgent {
   }
 
   displayLog() {
+
     console.log(
       'userAgent ' + this.ua
     );
 
-    console.log(
-      'device   ',
-      'pc:' + this.pc,
-      'tablet:' + this.tablet,
-      'mobile:' + this.mobile,
-    );
+    var logText;
 
-    console.log(
-      'OS       ',
-      'mac:' + this.mac,
-      'windows:' + this.windows,
-      'linux:' + this.linux,
-      'ios:' + this.ios,
-      'android:' + this.android,
-    );
+    logText = '';
+    logText += 'device  ';
+    logText += (this.pc)     ? '%cpc%c' : 'pc';
+    logText += (this.tablet) ? ', %ctablet%c' : ', tablet';
+    logText += (this.mobile) ? ', %cmobile%c' : ', mobile';
+    console.log(logText, 'color: red', '');
 
-    console.log(
-      'browser  ',
-      'edge:' + this.edge,
-      'ie11:' + this.ie11,
-      'ie10:' + this.ie10,
-      'ie9:' + this.ie9,
-      'safari:' + this.safari,
-      'chrome:' + this.chrome,
-      'firefox:' + this.firefox,
-      'opera:' + this.opera,
-      'webview:' + this.webview,
-    );
+    logText = '';
+    logText += 'OS      ';
+    logText += (this.mac)     ? '%cmac%c' : 'mac';
+    logText += (this.windows) ? ', %cwindows%c' : ', windows';
+    logText += (this.linux)   ? ', %clinux%c' : ', linux';
+    logText += (this.ios)     ? ', %cios%c' : ', ios';
+    logText += (this.android) ? ', %candroid%c' : ', android';
+    console.log(logText, 'color: red', '');
+
+    logText = '';
+    logText += 'browser ';
+    logText += (this.edge)    ? '%cedge%c' : 'edge';
+    logText += (this.ie11)    ? ', %cie11%c' : ', ie11';
+    logText += (this.ie10)    ? ', %cie10%c' : ', ie10';
+    logText += (this.ie9)     ? ', %cie9%c' : ', ie9';
+    logText += (this.safari)  ? ', %csafari%c' : ', safari';
+    logText += (this.chrome)  ? ', %cchrome%c' : ', chrome';
+    logText += (this.firefox) ? ', %cfirefox%c' : ', firefox';
+    logText += (this.opera)   ? ', %copera%c' : ', opera';
+    logText += (this.webview) ? ', %cwebview%c' : ', webview';
+    console.log(logText, 'color: red', '');
+
   }
 }
 
