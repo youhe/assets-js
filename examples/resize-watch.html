@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ResizeWatch | Examples | assets-js</title>
+</head>
+<body>
+  <p>see the console & resize window.</p>
+  <script src="../resize-watch.js"></script>
+  <script>
+    class Hoge {
+      resizeUpdate() {
+        console.log(
+          'width:' + window.ResizeWatch.width,
+          'height:' + window.ResizeWatch.height,
+          'aspect:' + window.ResizeWatch.aspect,
+        );
+      }
+    }
+    window.ResizeWatch.register(new Hoge);
+  </script>
+</body>
+</html>
