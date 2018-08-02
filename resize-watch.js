@@ -4,7 +4,7 @@
   window.ResizeWatch.aspect -> 横縦アスペクト比
 
   register で instances にインスタンスを追加すると
-  リサイズ時にそのインスタンスの resizeUpdate が呼ばれる。
+  リサイズ時にそのインスタンスの resize が呼ばれる。
 ****************************************************/
 
 class ResizeWatch {
