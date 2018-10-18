@@ -8,8 +8,8 @@
   <p>see the console & resize window.</p>
   <script src="../resize-watch.js"></script>
   <script>
-    class Hoge {
-      resizeUpdate() {
+    class ResizeLog {
+      resize() {
         console.log(
           'width:' + window.ResizeWatch.width,
           'height:' + window.ResizeWatch.height,
@@ -17,7 +17,7 @@
         );
       }
     }
-    window.ResizeWatch.register(new Hoge);
+    window.ResizeWatch.register(new ResizeLog);
   </script>
 </body>
 </html>

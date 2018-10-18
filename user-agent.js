@@ -1,14 +1,19 @@
-/****************************************************
+/*
+  // JS
   window.UserAgent.xxx -> 各UserAgent判定
 
+  // html
   document.body に各UserAgent判定クラスを追加
   true  -> xxx
   false -> no-xxx
-****************************************************/
+ */
 
 class UserAgent {
-  constructor() {
 
+  /*
+    @param {boolean} isLog - console.logを出力するか
+   */
+  constructor() {
     this.isLog = true;
 
     this.ua = window.navigator.userAgent.toLowerCase();
@@ -125,7 +130,6 @@ class UserAgent {
   }
 
   displayLog() {
-
     console.log(
       'userAgent ' + this.ua
     );
@@ -160,7 +164,6 @@ class UserAgent {
     logText += (this.opera)   ? ', %copera%c' : ', opera';
     logText += (this.webview) ? ', %cwebview%c' : ', webview';
     console.log(logText, 'color: red', '');
-
   }
 }
 
