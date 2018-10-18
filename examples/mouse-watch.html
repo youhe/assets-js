@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UserAgent | Examples | assets-js</title>
+</head>
+<body>
+  <p>see the console and move mouse.</p>
+  <script src="../user-agent.js"></script>
+  <script src="../mouse-watch.js"></script>
+  <script>
+    class Hoge {
+      mousemove() {
+        console.log(
+          'y:' + window.MouseMoveWatch.x,
+          'x:' + window.MouseMoveWatch.y,
+        );
+      }
+    }
+    window.MouseMoveWatch.register(new Hoge);
+  </script>
+</body>
+</html>
