@@ -48,7 +48,6 @@ class UserAgent {
 
     this.addBodyClass();
     if (this.isLog) this.displayLog();
-
   }
 
   checkDevice() {
