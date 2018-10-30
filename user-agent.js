@@ -17,7 +17,7 @@ class UserAgent {
     this.isLog = true;
 
     this.ua = window.navigator.userAgent.toLowerCase();
-    this.appversion = window.navigator.appVersion.toLowerCase();
+    this.av = window.navigator.appVersion.toLowerCase();
 
     // device
     this.pc = false;
@@ -84,9 +84,9 @@ class UserAgent {
   checkBrowser() {
     if(this.ua.indexOf('msie') != -1
     || this.ua.indexOf('trident') != -1) {
-      if (version.indexOf("msie 9.") > -1){
+      if (this.av.indexOf("msie 9.") > -1){
         this.ie9 = true;
-      }else if (version.indexOf("msie 10.") > -1){
+      }else if (this.av.indexOf("msie 10.") > -1){
         this.ie10 = true;
       }else{
         this.ie11 = true;
