@@ -9,13 +9,7 @@
  */
 
 class UserAgent {
-
-  /*
-    @param {boolean} isLog - console.logを出力するか
-   */
   constructor() {
-    this.isLog = false;
-
     this.ua = window.navigator.userAgent.toLowerCase();
     this.av = window.navigator.appVersion.toLowerCase();
 
