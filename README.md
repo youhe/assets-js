@@ -4,10 +4,25 @@ assets-js
 
 ## Usage
 
-### pageScroll
+### bound rect
 
 ```javascript
-const pageScroll = require('../modules/common/pageScroll').default;
+const boundRect = require('./bound-rect').default;
+const br = boundRect(elm);
+console.log(
+  br.top,
+  br.left,
+  br.width,
+  br.height,
+  br.fixTop,
+  br.fixLeft
+);
+```
+
+### page scroll
+
+```javascript
+const pageScroll = require('./page-scroll').default;
 pageScroll(start, end);
 ```
 
