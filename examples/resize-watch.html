@@ -6,9 +6,10 @@
 </head>
 <body>
   <p>see the console and resize window.</p>
+  <script src="../user-agent.js"></script>
   <script src="../resize-watch.js"></script>
   <script>
-    class ResizeLog {
+    class Hoge {
       resize() {
         console.log(
           'width:' + window.ResizeWatch.width,
@@ -17,7 +18,7 @@
         );
       }
     }
-    window.ResizeWatch.register(new ResizeLog);
+    window.ResizeWatch.register(new Hoge);
   </script>
 </body>
 </html>

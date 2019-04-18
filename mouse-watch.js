@@ -8,13 +8,12 @@
 
 class MouseMoveWatch {
   constructor() {
+    if (!window.UserAgent.pc) return;
 
     this.instances = [];
 
     this.x = this._x = document.body.clientWidth / 2;
     this.y = this._y = window.innerHeight / 2;
-
-    if (!window.UserAgent.pc) return;
 
     document.onmousemove = (e) => {
       if(this.instances.length === 0) return;
@@ -23,6 +22,9 @@ class MouseMoveWatch {
 
       this.x = e.clientX;
       this.y = e.clientY;
+
+      this.nX = e.clientX / window.ResizeWatch.width * 2 - 1;
+      this.nY = e.clientY / window.ResizeWatch.height * -2 - 1;
 
       for(var i = 0; i < this.instances.length; i++) {
         this.instances[i].mousemove();
