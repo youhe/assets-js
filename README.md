@@ -7,6 +7,7 @@
 ### Mkai
 ```javascript
 const Mkai = require('./mkai');
+
 // ラジアン -> 角度
 Mkai.degree();
 
