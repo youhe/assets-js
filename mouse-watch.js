@@ -24,7 +24,12 @@ class MouseMoveWatch {
       this.y = e.clientY;
 
       this.nX = e.clientX / window.ResizeWatch.width * 2 - 1;
-      this.nY = e.clientY / window.ResizeWatch.height * -2 - 1;
+      this.nX = Mkai.round(this.nX, 0.0001);
+      this.nX = Mkai.constrain(this.nX, -1, 1);
+
+      this.nY = e.clientY / window.ResizeWatch.height * -2 + 1;
+      this.nY = Mkai.round(this.nY, 0.0001);
+      this.nY = Mkai.constrain(this.nY, -1, 1);
 
       for(var i = 0; i < this.instances.length; i++) {
         this.instances[i].mousemove();
