@@ -8,12 +8,12 @@
 
 class MouseMoveWatch {
   constructor() {
-    if (!window.UserAgent.pc) return;
-
     this.instances = [];
 
-    this.x = this._x = document.body.clientWidth / 2;
-    this.y = this._y = window.innerHeight / 2;
+    this.x = window.innerWidth / 2;
+    this.y = window.innerHeight / 2;
+
+    if (!window.UserAgent.pc) return;
 
     document.onmousemove = (e) => {
       if(this.instances.length === 0) return;
