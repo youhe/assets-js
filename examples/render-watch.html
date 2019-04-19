@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Touch | Examples | assets-js</title>
+</head>
+<body>
+  <button onclick="window.RenderWatch.start()">window.RenderWatch.start()</button>
+  <button onclick="window.RenderWatch.stop()">window.RenderWatch.stop()</button>
+  <button onclick="window.RenderWatch.reset()">window.RenderWatch.reset()</button>
+  <script src="../dst/render-watch.js"></script>
+  <script>
+    class Hoge {
+      render() {
+        console.log(window.RenderWatch.frame);
+      }
+    }
+    window.RenderWatch.register(new Hoge);
+  </script>
+</body>
+</html>
