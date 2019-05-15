@@ -1,7 +1,7 @@
 /****************************************************
 ****************************************************/
 
-class ModalFixed {
+export default class ModalFixed {
   constructor(modal, open, close) {
     this.windowPageY = 0;
 
