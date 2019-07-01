@@ -1,4 +1,4 @@
-/*
+/****************************************************
   // JS
   window.UserAgent.xxx -> 各UserAgent判定
 
@@ -6,7 +6,7 @@
   document.body に各UserAgent判定クラスを追加
   true  -> xxx
   false -> no-xxx
- */
+****************************************************/
 
 class UserAgent {
   constructor() {

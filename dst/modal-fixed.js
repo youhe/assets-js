@@ -1,4 +1,8 @@
 /****************************************************
+
+  - Usage
+  const ModalFixed = require('./modules/common/modal-fixed').default;
+
 ****************************************************/
 
 export default class ModalFixed {
