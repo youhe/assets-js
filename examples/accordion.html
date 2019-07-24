@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>accordion | Examples | assets-js</title>
+  <style>
+    .header {
+      border: 1px solid #000;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-align: center;
+      width: 100%;
+    }
+    .body {
+      box-sizing: border-box;
+      padding-right: 20px;
+      padding-left: 20px;
+      background: #ddd;
+    }
+    .body p {
+      margin: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="js-accordion">
+    <div class="header js-accordion-open">ヘッダー</div>
+    <div class="body js-accordion-contents">
+      <div class="body-wrap js-accordion-contents-wrap">
+        <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+        <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+        <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+        <p>テキストテキストテキストテキストテキストテキストテキス</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../src/accordion.js"></script>
+  <script>
+    new Accordion(document.getElementById('js-accordion'))
+  </script>
+
+</body>
+</html>

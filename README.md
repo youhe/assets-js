@@ -24,3 +24,5 @@
 [Usage](/readme/touch-watch.md), [Examples](/examples/touch-watch.html)
 - user-agent.js
 [Usage](/readme/user-agent.md), [Examples](/examples/user-agent.html)
+- accordion.js
+[Usage](/readme/accordion.md), [Examples](/examples/accordion.html)
