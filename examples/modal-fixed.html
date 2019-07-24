@@ -7,9 +7,13 @@
   .modal-open {
     display: inline-block;
     margin-top: 50px;
-    margin-left: 50px;
+    margin-right: 10%;
+    margin-left: 10%;
     padding: 10px;
     border: 1px solid #000;
+    width: 80%;
+    font-size: 30px;
+    text-align: center;
     cursor: pointer;
   }
   .modal {
@@ -55,6 +59,8 @@
   <p class="modal-open js-modal-open">OPEN</p>
   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   <p class="modal-open js-modal-open">OPEN</p>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <p class="modal-open js-modal-open">OPEN</p>
 
   <div class="modal" id="js-modal">
     <div class="modal-bg js-modal-close"></div>
@@ -64,7 +70,7 @@
   </div>
   <!-- <script src="../dst/mkai.js"></script>
   <script src="../dst/user-agent.js"></script> -->
-  <script src="../dst/modal-fixed.js"></script>
+  <script src="../src/modal-fixed.js"></script>
   <script>
   const open = document.querySelectorAll('.js-modal-open');
   const close = document.querySelectorAll('.js-modal-close');

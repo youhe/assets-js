@@ -17,7 +17,7 @@ class RenderWatch {
   }
 
   register(instance) {
-    instance.RenderWatchWarking = true;
+    instance.RenderWatchWorking = true;
     this.instances.push(instance);
   }
 
@@ -34,14 +34,31 @@ class RenderWatch {
     this.frame = 0;
   }
 
+  setFps30() {
+    this.fps = 30;
+  }
+
+  setFps60() {
+    this.fps = 60;
+  }
+
   render() {
     if (this.working === false) return;
 
-    for(var i = 0; i < this.instances.length; i++) {
-      if (this.instances[i].RenderWatchWarking === true) {
-        this.instances[i].render();
+    if (this.fps == 60) {
+      for (var i = 0; i < this.instances.length; i++) {
+        if (this.instances[i].RenderWatchWorking === true) {
+          this.instances[i].render(this.frame);
+        }
+      }
+    } else if (this.fps == 30 && this.frame % 2 == 0) {
+      for (var i = 0; i < this.instances.length; i++) {
+        if (this.instances[i].RenderWatchWorking === true) {
+          this.instances[i].render(this.frame * 0.5);
+        }
       }
     }
+
     this.frame = this.frame + 1;
 
     requestAnimationFrame(() => {

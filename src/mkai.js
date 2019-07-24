@@ -1,9 +1,8 @@
 // --------------------------------------------------
 // mkai.js v0.0.1
 // Math 改
-// https://github.com/youhe/mkai.js
+// https://github.com/youhe/assets-js/src/mkai.js
 // This code may be freely distributed under the MIT license
-// minify by https://javascript-minifier.com/
 // --------------------------------------------------
 (function (name, definition) {
   /*global define module*/

@@ -5,17 +5,37 @@
   <title>Touch | Examples | assets-js</title>
 </head>
 <body>
+
   <button onclick="window.RenderWatch.start()">window.RenderWatch.start()</button>
   <button onclick="window.RenderWatch.stop()">window.RenderWatch.stop()</button>
   <button onclick="window.RenderWatch.reset()">window.RenderWatch.reset()</button>
-  <script src="../dst/render-watch.js"></script>
+
+  <br>
+
+  <button onclick="window.RenderWatch.setFps30()">window.RenderWatch.setFps30()</button>
+  <button onclick="window.RenderWatch.setFps60()">window.RenderWatch.setFps60()</button>
+
+  <br>
+
+  <button onclick="hoge.start()">instance start</button>
+  <button onclick="hoge.stop()">instance stop</button>
+
+  <script src="../src/render-watch.js"></script>
   <script>
-    class Hoge {
+     class Hoge {
       render() {
         console.log(window.RenderWatch.frame);
       }
+      start() {
+        this.RenderWatchWorking = true;
+      }
+      stop() {
+        this.RenderWatchWorking = false;
+      }
     }
-    window.RenderWatch.register(new Hoge);
+
+    const hoge = new Hoge();
+    window.RenderWatch.register(hoge);
   </script>
 </body>
 </html>

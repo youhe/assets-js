@@ -41,7 +41,6 @@ class UserAgent {
     this.checkBrowser();
 
     this.addBodyClass();
-    if (this.isLog) this.displayLog();
   }
 
   checkDevice() {
