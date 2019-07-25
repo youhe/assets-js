@@ -26,3 +26,5 @@
 [Usage](/readme/user-agent.md), [Examples](/build/user-agent.html)
 - accordion.js
 [Usage](/readme/accordion.md), [Examples](/build/accordion.html)
+- flex-slider.js
+[Usage](/readme/flex-slider.md), [Examples](/build/flex-slider.html)
