@@ -2,8 +2,6 @@
 
 ========
 
-## Item List
-
 - bound-rect.js
 [Usage](/readme/bound-rect.md), [Examples](/build/bound-rect.html)
 - easing.js
