@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>modal-fixed | </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description">
+    <meta name="keywords" content="undefined, ">
+    <style>.l-page { visibility: hidden; }</style>
+    <link rel="preload" as="style" href="/css/main.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="icon" href="/img/common/icon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/common/app_icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="modal-fixed | ">
+    <meta property="og:site_name" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:description">
+    <meta property="og:url" content="https://www.tplh.netundefined">
+    <meta property="og:image" content="https://www.tplh.net/img/common/undefined">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="modal-fixed | ">
+    <meta name="twitter:description">
+    <meta name="twitter:image" content="https://www.tplh.net/img/common/undefined">
+  </head>
+  <body>
+    <div class="l-page" data-page-id="modalFixed">
+      <!-- Start to define the global header.-->
+      <div class="l-gh"></div>
+      <!-- End to define the global header.-->
+      <div class="l-contents">
+        <!-- Start to define the main content.-->
+        <style>
+          .modal-open {
+            display: inline-block;
+            margin-top: 50px;
+            margin-right: 10%;
+            margin-left: 10%;
+            border: 1px solid #000;
+            width: 80%;
+            font-size: 30px;
+            text-align: center;
+            cursor: pointer;
+          }
+          .modal {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s ease 0s;
+          }
+          .modal.on {
+            opacity: 1;
+            pointer-events: auto;
+          }
+          .modal-bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+          }
+          .modal-body {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+          }
+          .modal-close {
+            position: absolute;
+            right: 10%;
+            top: 7%;
+            padding: 8px;
+            border: 1px solid #000;
+            cursor: pointer;
+          }
+          .modal-body-wrap {
+            overflow-y: scroll;
+            overflow-scrolling: touch;
+            -webkit-overflow-scrolling: touch;
+            position: absolute;
+            left: 5%;
+            top: 5%;
+            width: 90%;
+            height: 90%;
+            background: #eee;
+          }
+          .modal-body-scroll {
+            padding-top: 20px;
+            padding-bottom: 20px;
+          }
+          
+        </style>
+        <p class="modal-open js-modal-open">OPEN</p><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br>
+        <p class="modal-open js-modal-open">OPEN</p><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br>
+        <p class="modal-open js-modal-open">OPEN</p><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br>
+        <p class="modal-open js-modal-open">OPEN</p><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br>
+        <p class="modal-open js-modal-open">OPEN</p>
+        <div class="modal" id="js-modal">
+          <div class="modal-bg js-modal-close"></div>
+          <div class="modal-body">
+            <div class="modal-body-wrap" id="js-modal-wrap">
+              <div class="modal-body-scroll">
+                <p>テキスト0</p>
+                <p>テキスト1</p>
+                <p>テキスト2</p>
+                <p>テキスト3</p>
+                <p>テキスト4</p>
+                <p>テキスト5</p>
+                <p>テキスト6</p>
+                <p>テキスト7</p>
+                <p>テキスト8</p>
+                <p>テキスト9</p>
+                <p>テキスト10</p>
+                <p>テキスト11</p>
+                <p>テキスト12</p>
+                <p>テキスト13</p>
+                <p>テキスト14</p>
+                <p>テキスト15</p>
+                <p>テキスト16</p>
+                <p>テキスト17</p>
+                <p>テキスト18</p>
+                <p>テキスト19</p>
+                <p>テキスト20</p>
+                <p>テキスト21</p>
+                <p>テキスト22</p>
+                <p>テキスト23</p>
+                <p>テキスト24</p>
+                <p>テキスト25</p>
+                <p>テキスト26</p>
+                <p>テキスト27</p>
+                <p>テキスト28</p>
+                <p>テキスト29</p>
+              </div>
+            </div>
+            <div class="modal-close js-modal-close">CLOSE</div>
+          </div>
+        </div>
+        <!-- End to define the main content.-->
+      </div>
+      <!-- Start to define the global fotter.-->
+      <div class="l-gf"></div>
+      <!-- End to define the global fotter.-->
+    </div>
+    <script src="/js/main.min.js" async></script>
+  </body>
+</html>
