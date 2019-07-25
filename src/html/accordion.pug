@@ -1,0 +1,40 @@
+extends ./_layout/_page.pug
+
+block vars
+  -
+    var page = data.pages.accordion;
+
+block contentFixedBefore
+
+block contentStatic
+  style.
+    .header {
+      border: 1px solid #000;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-align: center;
+      width: 100%;
+    }
+    .body {
+      box-sizing: border-box;
+      padding-right: 20px;
+      padding-left: 20px;
+      height: 0;
+      background: #ddd;
+    }
+    .body p {
+      margin: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+  #js-accordion.container
+    .header.js-accordion-open ヘッダー
+    .body.js-accordion-contents
+      .body-wrap.js-accordion-contents-wrap
+        p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        p テキストテキストテキストテキストテキストテキストテキス
+
+block contentFixedAfter

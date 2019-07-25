@@ -1,10 +1,7 @@
 .DS_Store
-*.swp
-.project
 node_modules
-.idea/
-.vscode/
+ignore
+dst/**/*
+build/**/*
+.sass-cache
 npm-debug.log
-.jshintrc
-.vs/
-test/unit/three.*.unit.js

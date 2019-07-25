@@ -1,0 +1,22 @@
+extends ./_layout/_page.pug
+
+block vars
+  -
+    var page = data.pages.renderWatch;
+
+block contentFixedBefore
+
+block contentStatic
+  style.
+    button {
+      border: 1px solid #000;
+    }
+
+  p see the console and move mouse.
+
+  button#js-btn1 window.RenderWatch.setFps30
+  button#js-btn2 window.RenderWatch.setFps60
+  button#js-btn3 instance start
+  button#js-btn4 instance stop
+
+block contentFixedAfter

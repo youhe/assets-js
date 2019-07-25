@@ -1,0 +1,94 @@
+extends ./_layout/_page.pug
+
+block vars
+  -
+    var page = data.pages.modalFixed;
+
+block contentFixedBefore
+
+block contentStatic
+  style.
+    .modal-open {
+      display: inline-block;
+      margin-top: 50px;
+      margin-right: 10%;
+      margin-left: 10%;
+      border: 1px solid #000;
+      width: 80%;
+      font-size: 30px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .modal {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease 0s;
+    }
+    .modal.on {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+    }
+    .modal-body {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .modal-close {
+      position: absolute;
+      right: 10%;
+      top: 7%;
+      padding: 8px;
+      border: 1px solid #000;
+      cursor: pointer;
+    }
+    .modal-body-wrap {
+      overflow-y: scroll;
+      overflow-scrolling: touch;
+      -webkit-overflow-scrolling: touch;
+      position: absolute;
+      left: 5%;
+      top: 5%;
+      width: 90%;
+      height: 90%;
+      background: #eee;
+    }
+    .modal-body-scroll {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+  p.modal-open.js-modal-open OPEN
+  | <br><br><br><br><br><br><br><br><br><br>
+  | <br><br><br><br><br><br><br><br><br><br>
+  p.modal-open.js-modal-open OPEN
+  | <br><br><br><br><br><br><br><br><br><br>
+  | <br><br><br><br><br><br><br><br><br><br>
+  p.modal-open.js-modal-open OPEN
+  | <br><br><br><br><br><br><br><br><br><br>
+  | <br><br><br><br><br><br><br><br><br><br>
+  p.modal-open.js-modal-open OPEN
+  | <br><br><br><br><br><br><br><br><br><br>
+  | <br><br><br><br><br><br><br><br><br><br>
+  p.modal-open.js-modal-open OPEN
+
+  #js-modal.modal
+    .modal-bg.js-modal-close
+    .modal-body
+      .modal-body-wrap#js-modal-wrap
+        .modal-body-scroll
+          - for (var i = 0; i < 30; i++)
+            p テキスト#{i}
+      .modal-close.js-modal-close CLOSE
+      
+
+block contentFixedAfter

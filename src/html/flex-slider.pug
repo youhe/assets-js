@@ -1,0 +1,66 @@
+extends ./_layout/_page.pug
+
+block vars
+  -
+    var page = data.pages.flexSlider;
+
+block contentFixedBefore
+
+block contentStatic
+  style.
+    .container {
+      padding-top: 40px;
+    }
+    .wrap {
+      position: relative;
+      display: flex;
+    }
+    .item {
+      box-sizing: border-box;
+      padding-top: 40px;
+      padding-right: 20px;
+      padding-bottom: 80px;
+      padding-left: 20px;
+      background: #ddd;
+    }
+    .nav-left {
+      position: absolute;
+      left: 10px;
+      top: calc(50% - 20px);
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-right: 40px solid #333;
+      cursor: pointer;
+    }
+    .nav-right {
+      position: absolute;
+      right: 10px;
+      top: calc(50% - 20px);
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 40px solid #333;
+      cursor: pointer;
+    }
+
+  .container#js-flex-slider
+    .wrap.js-flexslider-wrap
+      .js-flexslider-move
+        .item.js-flexslider-item
+          h1 タイトル No.1
+          p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        .item.js-flexslider-item
+          h1 タイトル No.2
+          p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        .item.js-flexslider-item
+          h1 タイトル No.3
+          p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        .item.js-flexslider-item
+          h1 タイトル No.4
+          p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        .item.js-flexslider-item
+          h1 タイトル No.5
+          p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+      .nav-left.js-flexslider-nav-prev
+      .nav-right.js-flexslider-nav-next
+
+block contentFixedAfter

@@ -1,0 +1,30 @@
+extends ./_layout/_page.pug
+
+block vars
+  -
+    var page = data.pages.index;
+
+block contentFixedBefore
+
+block contentStatic
+  ul
+    li
+      a(href="accordion.html") accordion
+    li
+      a(href="modal-fixed.html") modal-fixed
+    li
+      a(href="mouse-watch.html") mouse-watch
+    li
+      a(href="render-watch.html") render-watch
+    li
+      a(href="resize-watch.html") resize-watch
+    li
+      a(href="user-agent.html") user-agent
+    li
+      a(href="page-scroll.html") page-scroll
+    li
+      a(href="flex-slider.html") flex-slider
+    li
+      a(href="touch-watch.html") touch-watch
+
+block contentFixedAfter

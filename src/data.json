@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "websiteName": "",
+    "keywords": "",
+    "themeColor": "#ffffff"
+  },
+  "pages": {
+    "index": {
+      "id": "index",
+      "title": "index"
+    },
+    "accordion": {
+      "id": "accordion",
+      "title": "accordion"
+    },
+    "modalFixed": {
+      "id": "modalFixed",
+      "title": "modal-fixed"
+    },
+    "mouseWatch": {
+      "id": "mouseWatch",
+      "title": "mouse-watch"
+    },
+    "renderWatch": {
+      "id": "renderWatch",
+      "title": "render-watch"
+    },
+    "resizeWatch": {
+      "id": "resizeWatch",
+      "title": "resize-watch"
+    },
+    "userAgent": {
+      "id": "userAgent",
+      "title": "user-agent"
+    },
+    "pageScroll": {
+      "id": "pageScroll",
+      "title": "page-scroll"
+    },
+    "flexSlider": {
+      "id": "flexSlider",
+      "title": "flex-slider"
+    },
+    "touchWatch": {
+      "id": "touchWatch",
+      "title": "touch-watch"
+    }
+  }
+}

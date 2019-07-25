@@ -1,0 +1,24 @@
+extends ./_layout/_page.pug
+
+block vars
+  -
+    var page = data.pages.touchWatch;
+
+block contentFixedBefore
+
+block contentStatic
+  style.
+    .box {
+      position: absolute;
+      left: 10%;
+      top: 15vh;
+      width: 80%;
+      height: 80vh;
+      background: #ddd;
+    }
+
+  p only tablet & mobile.
+  p see the console and move mouse in box.
+  .box#js-box
+
+block contentFixedAfter

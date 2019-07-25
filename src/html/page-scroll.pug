@@ -1,0 +1,45 @@
+extends ./_layout/_page.pug
+
+block vars
+  -
+    var page = data.pages.pageScroll;
+
+block contentFixedBefore
+
+block contentStatic
+  style.
+    .scroll {
+      text-align: center;
+    }
+    .pagetop {
+      margin: 0 auto;
+      border: 1px solid #000;
+      width: 80%;
+      text-align: center;
+      cursor: pointer;
+    }
+
+  |<br><br><br><br><br><br><br><br><br><br>
+  p.scroll scroll↓
+  |<br><br><br><br><br><br><br><br><br><br>
+  p.scroll scroll↓
+  |<br><br><br><br><br><br><br><br><br><br>
+  p.scroll scroll↓
+  |<br><br><br><br><br><br><br><br><br><br>
+  p.scroll scroll↓
+  |<br><br><br><br><br><br><br><br><br><br>
+  p.scroll scroll↓
+  |<br><br><br><br><br><br><br><br><br><br>
+  p.scroll scroll↓
+  |<br><br><br><br><br><br><br><br><br><br>
+  p.scroll scroll↓
+  |<br><br><br><br><br><br><br><br><br><br>
+  p.scroll scroll↓
+  |<br><br><br><br><br><br><br><br><br><br>
+  p.scroll scroll↓
+  |<br><br><br><br><br><br><br><br><br><br>
+  .pagetop#js-pagetop
+    |PAGE TOP
+  |<br><br><br><br><br><br><br><br><br><br>
+
+block contentFixedAfter
