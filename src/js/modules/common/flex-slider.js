@@ -45,6 +45,11 @@ export default class FlexSlider {
     this.itemElm = this.container.querySelectorAll('.js-flexslider-item');
     this.navPrevElm = this.container.querySelector('.js-flexslider-nav-prev');
     this.navNextElm = this.container.querySelector('.js-flexslider-nav-next');
+    this.paginationElm = this.container.querySelector('.js-flexslider-nav-pagination');
+    this.paginationItemElm = this.container.querySelectorAll('.js-flexslider-nav-pagination-item');
+
+    // ページネーションがあるか
+    this.isPagination = (this.paginationElm === null) ? false : true;
 
     // スライド複製
     for (var i = 0; i < this.itemElm.length; i++) {
@@ -155,8 +160,13 @@ export default class FlexSlider {
           itemMaxH = br.height;
         }
       }
-      this.wrapElm.style.height = itemMaxH + 'px';
+      this.wrapElm.style.height = `${itemMaxH}px`;
     }, 100)
+
+    // ページネーション初期化
+    if (this.isPagination) {
+      this.paginationItemElm[this.currentIndex].classList.add('on');
+    }
 
   }
 
@@ -169,7 +179,7 @@ export default class FlexSlider {
 
     // トランジション付与
     setTimeout(()=> {
-      item.style.transition = 'transform ' + this.ops.transitionTime + 's ease 0s';
+      item.style.transition = `transform ${this.ops.transitionTime}s ease 0s`;
     }, 100)
 
     // スライド横幅指定
@@ -198,11 +208,22 @@ export default class FlexSlider {
     this.initItem(this.itemElm[tIndex], tLength - this.length);
 
     setTimeout(()=> {
+
+      const ttIndex = this.currentIndex;
+      this.currentIndex = this.prevIndex(this.currentIndex);
+
       for (var i = 0; i < this.length; i++) {
         this.itemElm[i].tlX += this.itemElmW + this.ops.spaceBetween;
-        this.itemElm[i].style.transform = 'translateX(' + this.itemElm[i].tlX + 'px)';
+        this.itemElm[i].style.transform = `translateX(${this.itemElm[i].tlX}px)`;
       }
-      this.currentIndex = this.prevIndex(this.currentIndex);
+
+      if (this.isPagination) {
+        const rI = this.currentSlide(ttIndex);
+        const aI = this.currentSlide(this.currentIndex);
+        this.paginationItemElm[rI].classList.remove('on');
+        this.paginationItemElm[aI].classList.add('on');
+      }
+
     }, 100);
 
     setTimeout(()=> {
@@ -224,11 +245,22 @@ export default class FlexSlider {
     this.initItem(this.itemElm[tIndex], this.length - tLength);
 
     setTimeout(()=> {
+
+      const ttIndex = this.currentIndex;
+      this.currentIndex = this.nextIndex(this.currentIndex);
+
       for (var i = 0; i < this.length; i++) {
         this.itemElm[i].tlX -= this.itemElmW + this.ops.spaceBetween;
-        this.itemElm[i].style.transform = 'translateX(' + this.itemElm[i].tlX + 'px)';
+        this.itemElm[i].style.transform = `translateX(${this.itemElm[i].tlX}px)`;
       }
-      this.currentIndex = this.nextIndex(this.currentIndex);
+
+      if (this.isPagination) {
+        const rI = this.currentSlide(ttIndex);
+        const aI = this.currentSlide(this.currentIndex);
+        this.paginationItemElm[rI].classList.remove('on');
+        this.paginationItemElm[aI].classList.add('on');
+      }
+
     }, 100);
 
     setTimeout(()=> {
@@ -248,6 +280,13 @@ export default class FlexSlider {
 
     if (index == this.length - 1) return 0;
     else return index + 1;
+
+  }
+
+  currentSlide(index) {
+
+    if (index < this.length / 2) return index;
+    else return index - (this.length / 2);
 
   }
 
@@ -281,7 +320,7 @@ export default class FlexSlider {
   render(frame) {
 
     this.moveX1 = (this.moveX0 - this.moveX1) * 0.1 + this.moveX1;
-    this.moveElm.style.transform = 'translateX(' + this.moveX1 + 'px)';
+    this.moveElm.style.transform = `translateX(${this.moveX1}px)`;
 
     if ((this.frame + 1) % (this.opsPc.autoPlayInterval * 60) == 0) {
       this.nextItem();
