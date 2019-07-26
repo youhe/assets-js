@@ -1,3 +1,4 @@
+const easeing = require('./easing');
 import boundRect from './bound-rect.js';
 
 export default class FlexSlider {
@@ -10,7 +11,8 @@ export default class FlexSlider {
       spaceBetween: (ops.spaceBetween === undefined) ? 0 : ops.spaceBetween,
       initialSlide: (ops.initialSlide === undefined) ? 0 : ops.initialSlide,
       centeredSlides: (ops.centeredSlides === undefined) ? true : ops.centeredSlides,
-      transitionTime: (ops.transitionTime === undefined) ? 0.5 : ops.transitionTime,
+      animationTime: (ops.animationTime === undefined) ? 0.5 : ops.animationTime,
+      animationEase: (ops.animationEase === undefined) ? easeing.easeInOutQuad : ops.animationEase,
       autoPlay: (ops.autoPlay === undefined) ? true : ops.autoPlay,
       autoPlayInterval: (ops.autoPlayInterval === undefined) ? 4 : ops.autoPlayInterval,
     };
@@ -21,7 +23,7 @@ export default class FlexSlider {
       slidesPerView: (ops.sp.slidesPerView === undefined) ? 1 : ops.sp.slidesPerView,
       spaceBetween: (ops.sp.spaceBetween === undefined) ? 0 : ops.sp.spaceBetween,
       centeredSlides: (ops.sp.centeredSlides === undefined) ? true : ops.sp.centeredSlides,
-      transitionTime: (ops.sp.transitionTime === undefined) ? 0.5 : ops.sp.transitionTime,
+      animationTime: (ops.sp.animationTime === undefined) ? 0.5 : ops.sp.animationTime,
     };
 
     this.ops = this.opsPc;
@@ -83,6 +85,23 @@ export default class FlexSlider {
       }, false);
     }
 
+    if (this.isPagination) {
+      // for (var i = 0; i < this.paginationItemElm.length; i++) {
+      //   this.paginationItemElm[i].index = i;
+      //   this.paginationItemElm[i].addEventListener('click', (e)=> {
+      //
+      //     let index = e.currentTarget.index;
+      //     if (index == this.currentIndex) return;
+      //     if (index == this.currentIndex + (this.length / 2)) return;
+      //
+      //     if (this.length / 2 < this.currentIndex) index += this.length / 2;
+      //
+      //     this.paginationItem(index);
+      //
+      //   }, false);
+      // }
+    }
+
     // タッチイベント
     this.touchStartX = -1;
     this.touchMoveX = -1;
@@ -95,7 +114,7 @@ export default class FlexSlider {
 
     this.wrapElm.addEventListener('touchmove', (e)=> {
       this.touchMoveX = e.touches[0].pageX;
-      this.moveX0 = (this.touchMoveX - this.touchStartX) * 0.6;
+      this.moveX0 = (this.touchMoveX - this.touchStartX) * 0.4;
     }, false);
 
     this.wrapElm.addEventListener('touchend', (e)=> {
@@ -109,6 +128,10 @@ export default class FlexSlider {
         if (30 < tMX - tSX) this.prevItem();
         if (tMX - tSX < -30) this.nextItem();
       }
+
+      setTimeout(()=> {
+        this.moveX0 = 0;
+      }, 300);
     }, false);
 
     window.ResizeWatch.register(this);
@@ -120,6 +143,9 @@ export default class FlexSlider {
 
     if (window.ResizeWatch.width <= this.opsSp.maxWidth) {
       this.ops = this.opsSp;
+      this.ops.animationEase = this.opsPc.animationEase;
+      this.ops.autoPlay = this.opsPc.autoPlay;
+      this.ops.autoPlayInterval = this.opsPc.autoPlayInterval;
     } else {
       this.ops = this.opsPc;
     }
@@ -146,7 +172,7 @@ export default class FlexSlider {
 
     // 半分だけ左側に配置
     let index2 = this.currentIndex;
-    for (var i = 0; i < this.length / 4; i++) {
+    for (var i = 0; i < this.length / 2; i++) {
       index2 = this.prevIndex(index2);
       this.initItem(this.itemElm[index2], -i - 1);
     }
@@ -170,102 +196,146 @@ export default class FlexSlider {
 
   }
 
-  initItem(item, index) {
+  initItem(item, step) {
 
     // 初期化
     item.style.transition = '';
     item.tlX = 0;
     item.style.transform = 'translateX(0)';
 
-    // トランジション付与
-    setTimeout(()=> {
-      item.style.transition = `transform ${this.ops.transitionTime}s ease 0s`;
-    }, 100)
-
     // スライド横幅指定
-    item.style.width = this.itemElmW + 'px';
+    item.style.width = `${this.itemElmW}px`;
 
     // スライドleft値指定
-    let l = (this.itemElmW + this.ops.spaceBetween) * index;
+    let l = (this.itemElmW + this.ops.spaceBetween) * step;
     // 真ん中寄せの場合
     if (this.ops.centeredSlides) {
       l += (this.containerBR.width - this.itemElmW) * 0.5;
     }
-    item.style.left = l + 'px';
+    item.style.left = `${l}px`;
 
   }
 
   prevItem() {
 
-    this.animationStart();
+    if (this.isAnimation == true) return;
+    this.isAnimation = true;
 
-    // 右端のスライドを反対側に移動
-    let tIndex = this.currentIndex;
-    let tLength = this.length - Math.floor(this.length / 4) - 1;
-    for (var i = 0; i < tLength; i++) {
-      tIndex = this.nextIndex(tIndex);
-    }
-    this.initItem(this.itemElm[tIndex], tLength - this.length);
+    this.animationStart();
+    this.moveItem('prev', this.currentIndex);
 
     setTimeout(()=> {
 
       const ttIndex = this.currentIndex;
       this.currentIndex = this.prevIndex(this.currentIndex);
 
-      for (var i = 0; i < this.length; i++) {
-        this.itemElm[i].tlX += this.itemElmW + this.ops.spaceBetween;
-        this.itemElm[i].style.transform = `translateX(${this.itemElm[i].tlX}px)`;
-      }
+      this.animation(-(this.itemElmW + this.ops.spaceBetween), 0);
 
       if (this.isPagination) {
-        const rI = this.currentSlide(ttIndex);
-        const aI = this.currentSlide(this.currentIndex);
-        this.paginationItemElm[rI].classList.remove('on');
-        this.paginationItemElm[aI].classList.add('on');
+        this.chengePagination(ttIndex, this.currentIndex);
       }
 
     }, 100);
 
     setTimeout(()=> {
       this.animationEnd();
-    }, (this.ops.transitionTime * 100) + 200);
+    }, (this.ops.animationTime * 100) + 200);
 
   }
 
   nextItem() {
 
-    this.animationStart();
+    if (this.isAnimation == true) return;
+    this.isAnimation = true;
 
-    // 左端のスライドを反対側に移動
-    let tIndex = this.currentIndex;
-    let tLength = Math.floor(this.length / 4) + 1;
-    for (var i = 0; i < tLength; i++) {
-      tIndex = this.prevIndex(tIndex);
-    }
-    this.initItem(this.itemElm[tIndex], this.length - tLength);
+    this.animationStart();
+    this.moveItem('next', this.currentIndex);
 
     setTimeout(()=> {
 
       const ttIndex = this.currentIndex;
       this.currentIndex = this.nextIndex(this.currentIndex);
 
-      for (var i = 0; i < this.length; i++) {
-        this.itemElm[i].tlX -= this.itemElmW + this.ops.spaceBetween;
-        this.itemElm[i].style.transform = `translateX(${this.itemElm[i].tlX}px)`;
-      }
+      this.animation(this.itemElmW + this.ops.spaceBetween, 0);
 
       if (this.isPagination) {
-        const rI = this.currentSlide(ttIndex);
-        const aI = this.currentSlide(this.currentIndex);
-        this.paginationItemElm[rI].classList.remove('on');
-        this.paginationItemElm[aI].classList.add('on');
+        this.chengePagination(ttIndex, this.currentIndex);
       }
 
     }, 100);
 
+  }
+
+  paginationItem(index) {
+
+    if (this.isAnimation == true) return;
+    this.isAnimation = true;
+
+    this.animationStart();
+
+    const cI = (this.length / 2 < this.currentIndex) ? this.currentIndex / 2 : this.currentIndex;
+    // 移動ステップ数
+    // start -> goal
+    const step0 = -(index - cI);
+    // start -> 0 -> end -> goal
+    const step1 = -(0 - cI + index - (this.length - 1));
+    // start -> end -> 0 -> goal
+    const step2 = -((this.length - 1) - cI + index - 0);
+    // １番ステップ数が少ない物を選ぶ
+    let step = (Math.abs(step0) < Math.abs(step1)) ? step0 : step1;
+    step = (Math.abs(step) < Math.abs(step2)) ? step : step2;
+
+    if (step < 0) {
+      for (var i = 0; step < i; i--) {
+        this.moveItem('next', this.currentIndex - i, i);
+      }
+    } else {
+      for (var i = 0; i < step; i++) {
+        this.moveItem('prev', this.currentIndex - i, i);
+      }
+    }
+
     setTimeout(()=> {
-      this.animationEnd();
-    }, (this.ops.transitionTime * 100) + 200);
+
+      const ttIndex = this.currentIndex;
+      this.currentIndex = index;
+
+      const mX = -(this.itemElmW + this.ops.spaceBetween) * step;
+      this.animation(mX, 0);
+
+      if (this.isPagination) {
+        this.chengePagination(ttIndex, this.currentIndex);
+      }
+
+    }, 100);
+
+  }
+
+  moveItem(ac, index, mStep = 0) {
+
+    if (ac == 'prev') {
+
+      // 右端のスライドを反対側に移動
+      let tIndex = index;
+      let tLength = this.length / 2 - 1;
+      for (var i = 0; i < tLength; i++) {
+        tIndex = this.nextIndex(tIndex);
+      }
+      const step = tLength - this.length - mStep;
+      this.initItem(this.itemElm[tIndex], step);
+
+    } else if (ac == 'next') {
+
+      // 左端のスライドを反対側に移動
+      let tIndex = index;
+      let tLength = this.length / 2;
+      for (var i = 0; i < tLength; i++) {
+        tIndex = this.prevIndex(tIndex);
+      }
+      const step = this.length - tLength - mStep;
+      this.initItem(this.itemElm[tIndex], step);
+
+    }
 
   }
 
@@ -292,8 +362,6 @@ export default class FlexSlider {
 
   animationStart() {
 
-    if (this.isAnimation) return;
-    this.isAnimation = true;
     this.frame = 0;
 
     for (var i = 0; i < this.length; i++) {
@@ -302,14 +370,56 @@ export default class FlexSlider {
 
   }
 
+  animation(moveX, frame) {
+
+    const f = frame / 60 / this.ops.animationTime;
+
+    if (f < 1) {
+
+      const mX = moveX * this.ops.animationEase(f);
+      for (var i = 0; i < this.length; i++) {
+        const tlX = this.itemElm[i].tlX - mX;
+        this.itemElm[i].style.transform = `translateX(${tlX}px)`;
+      }
+
+      requestAnimationFrame(() => {
+        this.animation(moveX, frame + 1);
+      });
+
+    } else {
+
+      const mX = moveX;
+      for (var i = 0; i < this.length; i++) {
+        this.itemElm[i].tlX = this.itemElm[i].tlX - mX;
+        this.itemElm[i].style.transform = `translateX(${this.itemElm[i].tlX}px)`;
+      }
+
+      setTimeout(()=> {
+        this.animationEnd();
+      }, 100);
+
+      return;
+
+    }
+
+  }
+
   animationEnd() {
 
     this.isAnimation = false;
-    this.moveX0 = 0;
 
     for (var i = 0; i < this.length; i++) {
       this.itemElm[i].style.willChange = '';
     }
+
+  }
+
+  chengePagination(rmIndex, adIndex) {
+
+    const rI = this.currentSlide(rmIndex);
+    const aI = this.currentSlide(adIndex);
+    this.paginationItemElm[rI].classList.remove('on');
+    this.paginationItemElm[aI].classList.add('on');
 
   }
 
@@ -322,6 +432,7 @@ export default class FlexSlider {
     this.moveX1 = (this.moveX0 - this.moveX1) * 0.1 + this.moveX1;
     this.moveElm.style.transform = `translateX(${this.moveX1}px)`;
 
+    if (!this.ops.autoPlay) return;
     if ((this.frame + 1) % (this.opsPc.autoPlayInterval * 60) == 0) {
       this.nextItem();
     }
