@@ -7,23 +7,23 @@ export default class FlexSlider {
     this.container = container;
 
     this.opsPc = {
-      slidesPerView: (ops.slidesPerView === undefined) ? 1 : ops.slidesPerView,
-      spaceBetween: (ops.spaceBetween === undefined) ? 0 : ops.spaceBetween,
-      initialSlide: (ops.initialSlide === undefined) ? 0 : ops.initialSlide,
-      centeredSlides: (ops.centeredSlides === undefined) ? true : ops.centeredSlides,
-      animationTime: (ops.animationTime === undefined) ? 0.5 : ops.animationTime,
-      animationEase: (ops.animationEase === undefined) ? easeing.easeInOutQuad : ops.animationEase,
-      autoPlay: (ops.autoPlay === undefined) ? true : ops.autoPlay,
+      slidesPerView:    (ops.slidesPerView === undefined) ? 1 : ops.slidesPerView,
+      spaceBetween:     (ops.spaceBetween === undefined) ? 0 : ops.spaceBetween,
+      initialSlide:     (ops.initialSlide === undefined) ? 0 : ops.initialSlide,
+      centeredSlides:   (ops.centeredSlides === undefined) ? true : ops.centeredSlides,
+      animationTime:    (ops.animationTime === undefined) ? 0.5 : ops.animationTime,
+      animationEase:    (ops.animationEase === undefined) ? easeing.easeInOutQuad : ops.animationEase,
+      autoPlay:         (ops.autoPlay === undefined) ? true : ops.autoPlay,
       autoPlayInterval: (ops.autoPlayInterval === undefined) ? 4 : ops.autoPlayInterval,
     };
 
     if (ops.sp === undefined) ops.sp = {};
     this.opsSp = {
-      maxWidth: (ops.sp.maxWidth === undefined) ? 767 : ops.sp.maxWidth,
-      slidesPerView: (ops.sp.slidesPerView === undefined) ? 1 : ops.sp.slidesPerView,
-      spaceBetween: (ops.sp.spaceBetween === undefined) ? 0 : ops.sp.spaceBetween,
+      maxWidth:       (ops.sp.maxWidth === undefined) ? 767 : ops.sp.maxWidth,
+      slidesPerView:  (ops.sp.slidesPerView === undefined) ? 1 : ops.sp.slidesPerView,
+      spaceBetween:   (ops.sp.spaceBetween === undefined) ? 0 : ops.sp.spaceBetween,
       centeredSlides: (ops.sp.centeredSlides === undefined) ? true : ops.sp.centeredSlides,
-      animationTime: (ops.sp.animationTime === undefined) ? 0.5 : ops.sp.animationTime,
+      animationTime:  (ops.sp.animationTime === undefined) ? 0.5 : ops.sp.animationTime,
     };
 
     this.ops = this.opsPc;
@@ -37,17 +37,20 @@ export default class FlexSlider {
     // アニメーション中かどうかのflag
     this.isAnimation = false;
 
+    // 自動再生の制御
+    this.autoPlay = true;
+
     this.frame = 0;
 
     this.moveX0 = 0;
     this.moveX1 = 0;
 
-    this.wrapElm = this.container.querySelector('.js-flexslider-wrap');
-    this.moveElm = this.container.querySelector('.js-flexslider-move');
-    this.itemElm = this.container.querySelectorAll('.js-flexslider-item');
-    this.navPrevElm = this.container.querySelector('.js-flexslider-nav-prev');
-    this.navNextElm = this.container.querySelector('.js-flexslider-nav-next');
-    this.paginationElm = this.container.querySelector('.js-flexslider-nav-pagination');
+    this.wrapElm           = this.container.querySelector('.js-flexslider-wrap');
+    this.moveElm           = this.container.querySelector('.js-flexslider-move');
+    this.itemElm           = this.container.querySelectorAll('.js-flexslider-item');
+    this.navPrevElm        = this.container.querySelector('.js-flexslider-nav-prev');
+    this.navNextElm        = this.container.querySelector('.js-flexslider-nav-next');
+    this.paginationElm     = this.container.querySelector('.js-flexslider-nav-pagination');
     this.paginationItemElm = this.container.querySelectorAll('.js-flexslider-nav-pagination-item');
 
     // ページネーションがあるか
@@ -71,6 +74,14 @@ export default class FlexSlider {
       this.itemElm[i].style.left = '-100000000px';
       this.itemElm[i].style.top = '0';
     }
+
+    // マウスオーバー中は自動再生させない
+    this.wrapElm.addEventListener('mouseover', (e)=> {
+      this.autoPlay = false;
+    });
+    this.wrapElm.addEventListener('mouseleave', (e)=> {
+      this.autoPlay = true;
+    });
 
     // ナビ イベント
     if (this.navPrevElm) {
@@ -429,10 +440,11 @@ export default class FlexSlider {
 
   render(frame) {
 
-    this.moveX1 = (this.moveX0 - this.moveX1) * 0.1 + this.moveX1;
+    this.moveX1 = (this.moveX0 - this.moveX1) * 0.2 + this.moveX1;
     this.moveElm.style.transform = `translateX(${this.moveX1}px)`;
 
     if (!this.ops.autoPlay) return;
+    if (!this.autoPlay) return;
     if ((this.frame + 1) % (this.opsPc.autoPlayInterval * 60) == 0) {
       this.nextItem();
     }
