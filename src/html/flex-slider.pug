@@ -61,43 +61,75 @@ block contentStatic
       background: transparent;
     }
 
-  .container#js-flex-slider
+  .container#js-flex-slider0
     .wrap.js-flexslider-wrap
       .js-flexslider-move
-        .item.js-flexslider-item
-          h1 タイトル No.1
-          p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-        .item.js-flexslider-item
-          h1 タイトル No.2
-          p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-        .item.js-flexslider-item
-          h1 タイトル No.3
-          p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-        .item.js-flexslider-item
-          h1 タイトル No.4
-          p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-        .item.js-flexslider-item
-          h1 タイトル No.5
-          p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-        .item.js-flexslider-item
-          h1 タイトル No.6
-          p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-        .item.js-flexslider-item
-          h1 タイトル No.7
-          p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-        .item.js-flexslider-item
-          h1 タイトル No.8
-          p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        .js-flexslider-tMove
+          - for (var i = 0; i < 5; i++)
+            .item.js-flexslider-item
+              h1 --- No.#{ i + 1 } ---
+              p
+                |slidesPerView: 3.2
+                br
+                |spaceBetween: 20
+                br
+                |sp - slidesPerView: 1.1
+                br
+                |sp - spaceBetween: 10
       .nav-left.js-flexslider-nav-prev
       .nav-right.js-flexslider-nav-next
       .pagination.js-flexslider-nav-pagination
-        .pagination-item.js-flexslider-nav-pagination-item
-        .pagination-item.js-flexslider-nav-pagination-item
-        .pagination-item.js-flexslider-nav-pagination-item
-        .pagination-item.js-flexslider-nav-pagination-item
-        .pagination-item.js-flexslider-nav-pagination-item
-        .pagination-item.js-flexslider-nav-pagination-item
-        .pagination-item.js-flexslider-nav-pagination-item
-        .pagination-item.js-flexslider-nav-pagination-item
+        - for (var i = 0; i < 5; i++)
+          .pagination-item.js-flexslider-nav-pagination-item
+
+  .container#js-flex-slider1
+    .wrap.js-flexslider-wrap
+      .js-flexslider-move
+        .js-flexslider-tMove
+          - for (var i = 0; i < 8; i++)
+            .item.js-flexslider-item
+              h1 --- No.#{ i + 1 } ---
+              p
+                |slidesPerView: 5.0
+                br
+                |spaceBetween: 0
+                br
+                |centeredSlides: false
+                br
+                |sp - slidesPerView: 2.0
+                br
+                |sp - spaceBetween: 0
+                br
+                |sp - centeredSlides: false
+      .nav-left.js-flexslider-nav-prev
+      .nav-right.js-flexslider-nav-next
+      .pagination.js-flexslider-nav-pagination
+        - for (var i = 0; i < 8; i++)
+          .pagination-item.js-flexslider-nav-pagination-item
+
+  .container#js-flex-slider2
+    .wrap.js-flexslider-wrap
+      .js-flexslider-move
+        .js-flexslider-tMove
+          - for (var i = 0; i < 4; i++)
+            .item.js-flexslider-item
+              h1 --- No.#{ i + 1 } ---
+              p
+                |slidesPerView: 1.1
+                br
+                |spaceBetween: 40
+                br
+                |sp - slidesPerView: 1.0
+                br
+                |sp - spaceBetween: 0
+      .nav-left.js-flexslider-nav-prev
+      .nav-right.js-flexslider-nav-next
+      .pagination.js-flexslider-nav-pagination
+        - for (var i = 0; i < 4; i++)
+          .pagination-item.js-flexslider-nav-pagination-item
+
+  br
+  br
+  br
 
 block contentFixedAfter
