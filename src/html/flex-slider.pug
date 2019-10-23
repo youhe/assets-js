@@ -17,11 +17,36 @@ block contentStatic
     }
     .item {
       box-sizing: border-box;
-      padding-top: 40px;
-      padding-right: 20px;
-      padding-bottom: 80px;
-      padding-left: 20px;
+      //- padding-top: 40px;
+      //- padding-right: 20px;
+      //- padding-bottom: 80px;
+      //- padding-left: 20px;
       background: #ddd;
+    }
+    .item--border {
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+      border-left: 1px solid #000;
+    }
+    .item--center {
+      text-align: center;
+    }
+    .item a {
+      display: block;
+      color: #000;
+      text-decoration: none;
+    }
+    .item h1 {
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+    .item p {
+      padding-right: 30px;
+      padding-bottom: 30px;
+      padding-left: 30px;
+    }
+    .item a:hover {
+      color: #c00;
     }
     .nav-left {
       position: absolute;
@@ -64,43 +89,42 @@ block contentStatic
   .container#js-flex-slider0
     .wrap.js-flexslider-wrap
       .js-flexslider-move
-        .js-flexslider-tMove
-          - for (var i = 0; i < 5; i++)
-            .item.js-flexslider-item
-              h1 --- No.#{ i + 1 } ---
-              p
-                |slidesPerView: 3.2
-                br
-                |spaceBetween: 20
-                br
-                |sp - slidesPerView: 1.1
-                br
-                |sp - spaceBetween: 10
+        - for (var i = 0; i < 5; i++)
+          .item.js-flexslider-item
+            h1 --- No.#{ i + 1 } ---
+            p
+              |slidesPerView: 3.2
+              br
+              |spaceBetween: 20
+              br
+              |sp - slidesPerView: 1.1
+              br
+              |sp - spaceBetween: 10
       .nav-left.js-flexslider-nav-prev
       .nav-right.js-flexslider-nav-next
       .pagination.js-flexslider-nav-pagination
         - for (var i = 0; i < 5; i++)
           .pagination-item.js-flexslider-nav-pagination-item
+  #debug
 
   .container#js-flex-slider1
     .wrap.js-flexslider-wrap
       .js-flexslider-move
-        .js-flexslider-tMove
-          - for (var i = 0; i < 8; i++)
-            .item.js-flexslider-item
-              h1 --- No.#{ i + 1 } ---
-              p
-                |slidesPerView: 5.0
-                br
-                |spaceBetween: 0
-                br
-                |centeredSlides: false
-                br
-                |sp - slidesPerView: 2.0
-                br
-                |sp - spaceBetween: 0
-                br
-                |sp - centeredSlides: false
+        - for (var i = 0; i < 8; i++)
+          .item.item--border.js-flexslider-item
+            h1 --- No.#{ i + 1 } ---
+            p
+              |slidesPerView: 5.0
+              br
+              |spaceBetween: 0
+              br
+              |centeredSlides: false
+              br
+              |sp - slidesPerView: 2.0
+              br
+              |sp - spaceBetween: 0
+              br
+              |sp - centeredSlides: false
       .nav-left.js-flexslider-nav-prev
       .nav-right.js-flexslider-nav-next
       .pagination.js-flexslider-nav-pagination
@@ -110,14 +134,16 @@ block contentStatic
   .container#js-flex-slider2
     .wrap.js-flexslider-wrap
       .js-flexslider-move
-        .js-flexslider-tMove
-          - for (var i = 0; i < 4; i++)
-            .item.js-flexslider-item
+        - for (var i = 0; i < 4; i++)
+          .item.item--center.js-flexslider-item
+            a(href="#")
               h1 --- No.#{ i + 1 } ---
               p
                 |slidesPerView: 1.1
                 br
                 |spaceBetween: 40
+                br
+                |animationTime 700
                 br
                 |sp - slidesPerView: 1.0
                 br

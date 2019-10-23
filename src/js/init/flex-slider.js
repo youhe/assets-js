@@ -14,7 +14,6 @@ export default function() {
       const ops0 = {
         slidesPerView: 3.2,
         spaceBetween: 20,
-        // autoPlay: false,
         sp: {
           slidesPerView: 1.1,
           spaceBetween: 10,
@@ -27,7 +26,6 @@ export default function() {
         slidesPerView: 5.0,
         spaceBetween: 0,
         centeredSlides: false,
-        // autoPlay: false,
         sp: {
           slidesPerView: 2.0,
           spaceBetween: 0,
@@ -41,7 +39,7 @@ export default function() {
       const ops2 = {
         slidesPerView: 1.1,
         spaceBetween: 40,
-        // autoPlay: false,
+        animationTime: 700,
         sp: {
           slidesPerView: 1.0,
           spaceBetween: 0,
