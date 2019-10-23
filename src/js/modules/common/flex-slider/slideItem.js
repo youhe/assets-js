@@ -53,4 +53,32 @@ export default class SlideItem {
 
   }
 
+  clickEventOn() {
+
+    if (this.clickStatus == 'on') return;
+    this.clickStatus = 'on'
+
+    const link = this.elm.querySelectorAll('a');
+    for (var i = 0; i < link.length; i++) {
+      link[i].removeEventListener('click', this.clickOff);
+    }
+
+  }
+
+  clickEventOff() {
+
+    if (this.clickStatus == 'off') return;
+    this.clickStatus = 'off'
+
+    const link = this.elm.querySelectorAll('a');
+    for (var i = 0; i < link.length; i++) {
+      link[i].addEventListener('click', this.clickOff);
+    }
+
+  }
+
+  clickOff(e) {
+    e.preventDefault();
+  }
+
 }

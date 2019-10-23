@@ -169,11 +169,25 @@ export default class FlexSlider {
         this.mouseMoveX0 = (this.mouseMoveX - this.mouseStartX) * 1.2;
       }
 
+      if (50 < Math.abs(this.mouseMoveX - this.mouseStartX)) {
+        for (var i = 0; i < this.slideItems.length; i++) {
+          this.slideItems[i].clickEventOff()
+        }
+      }
+
     }, false);
 
     this.wrapElm.addEventListener('mouseup', (e)=> {
 
+      e.preventDefault();
+
       this.isMouseAnimation = false;
+
+      setTimeout(()=> {
+        for (var i = 0; i < this.slideItems.length; i++) {
+          this.slideItems[i].clickEventOn()
+        }
+      }, 50);
 
       if (this.mouseStartX != -1 && this.mouseMoveX != -1) {
         if (50 < this.mouseMoveX - this.mouseStartX) {
@@ -189,11 +203,19 @@ export default class FlexSlider {
       this.mouseMoveX = -1;
       this.mouseMoveX0 = 0;
 
+      return false;
+
     }, false);
 
     this.wrapElm.addEventListener('mouseleave', (e)=> {
 
+      e.preventDefault();
+
       this.isMouseAnimation = false;
+
+      for (var i = 0; i < this.slideItems.length; i++) {
+        this.slideItems[i].clickEventOn()
+      }
 
       if (this.mouseStartX != -1 && this.mouseMoveX != -1) {
         if (30 < this.mouseMoveX - this.mouseStartX) {
