@@ -110,10 +110,10 @@ export default class FlexSlider {
 
     // マウスオーバー中は自動再生させない
     if (window.UserAgent.pc) {
-      this.wrapElm.addEventListener('mouseover', (e)=> {
+      this.wrapElm.addEventListener('mouseenter', (e)=> {
         this.autoPlay = false;
       });
-      this.wrapElm.addEventListener('mouseout', (e)=> {
+      this.wrapElm.addEventListener('mouseleave', (e)=> {
         this.autoPlay = true;
       });
     }
@@ -176,10 +176,12 @@ export default class FlexSlider {
       this.isMouseAnimation = false;
 
       if (this.mouseStartX != -1 && this.mouseMoveX != -1) {
-        if (30 < this.mouseMoveX - this.mouseStartX) {
+        if (50 < this.mouseMoveX - this.mouseStartX) {
           this.prevItem();
-        } else if (this.mouseMoveX - this.mouseStartX < -30) {
+        } else if (this.mouseMoveX - this.mouseStartX < -50) {
           this.nextItem();
+        } else {
+          this.animationStart(null, 0);
         }
       }
 
@@ -189,9 +191,19 @@ export default class FlexSlider {
 
     }, false);
 
-    this.wrapElm.addEventListener('mouseout', (e)=> {
+    this.wrapElm.addEventListener('mouseleave', (e)=> {
 
       this.isMouseAnimation = false;
+
+      if (this.mouseStartX != -1 && this.mouseMoveX != -1) {
+        if (30 < this.mouseMoveX - this.mouseStartX) {
+          this.prevItem();
+        } else if (this.mouseMoveX - this.mouseStartX < -30) {
+          this.nextItem();
+        } else {
+          this.animationStart(null, 0);
+        }
+      }
 
       this.mouseStartX = -1;
       this.mouseMoveX = -1;
@@ -200,8 +212,10 @@ export default class FlexSlider {
     }, false);
 
     // タッチイベント
-    if (window.UserAgent.sp) {
+    if (window.UserAgent.mobile) {
       this.wrapElm.addEventListener('touchstart', (e)=> {
+
+        e.preventDefault();
 
         this.isTouchAnimation = true;
 
@@ -218,7 +232,7 @@ export default class FlexSlider {
           e.preventDefault();
         }
 
-        this.touchMoveX0 = (this.touchMoveX - this.touchStartX) * 1.2;
+        this.touchMoveX0 = (this.touchMoveX - this.touchStartX) * 1.0;
 
       }, false);
 
@@ -231,6 +245,8 @@ export default class FlexSlider {
             this.prevItem();
           } else if (this.touchMoveX - this.touchStartX < -30) {
             this.nextItem();
+          } else {
+            this.animationStart(null, 0);
           }
         }
 
@@ -244,6 +260,8 @@ export default class FlexSlider {
     window.ResizeWatch.register(this);
     window.RenderWatch.register(this);
 
+    this.init();
+
   }
 
   resize() {
@@ -254,7 +272,7 @@ export default class FlexSlider {
       this.ops = this.opsPc;
     }
 
-    if (!window.UserAgent.sp) {
+    if (!window.UserAgent.mobile) {
       this.init();
     }
 
@@ -381,7 +399,7 @@ export default class FlexSlider {
 
     setTimeout(()=> {
       this.animationEnd();
-    }, this.ops.animationTime + 100);
+    }, this.ops.animationTime + 10);
 
   }
 

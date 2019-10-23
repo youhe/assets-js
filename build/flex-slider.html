@@ -35,64 +35,192 @@
           }
           .wrap {
             position: relative;
-            display: flex;
+            padding-bottom: 16px;
           }
           .item {
             box-sizing: border-box;
-            padding-top: 40px;
-            padding-right: 20px;
-            padding-bottom: 80px;
-            padding-left: 20px;
+            //- padding-top: 40px;
+            //- padding-right: 20px;
+            //- padding-bottom: 80px;
+            //- padding-left: 20px;
             background: #ddd;
+          }
+          .item--border {
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            border-left: 1px solid #000;
+          }
+          .item--center {
+            text-align: center;
+          }
+          .item a {
+            display: block;
+            color: #000;
+            text-decoration: none;
+          }
+          .item h1 {
+            padding-right: 30px;
+            padding-left: 30px;
+          }
+          .item p {
+            padding-right: 30px;
+            padding-bottom: 30px;
+            padding-left: 30px;
+          }
+          .item a:hover {
+            color: #c00;
           }
           .nav-left {
             position: absolute;
-            left: 10px;
-            top: calc(50% - 20px);
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-right: 40px solid #333;
+            left: 15px;
+            top: calc(50% - 18px);
+            border-top: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            border-right: 24px solid #333;
             cursor: pointer;
           }
           .nav-right {
             position: absolute;
-            right: 10px;
-            top: calc(50% - 20px);
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-left: 40px solid #333;
+            right: 15px;
+            top: calc(50% - 18px);
+            border-top: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            border-left: 24px solid #333;
             cursor: pointer;
+          }
+          .pagination {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+          }
+          .pagination-item {
+            box-sizing: border-box;
+            margin: 0 4px;
+            width: 6px;
+            height: 6px;
+            background: #000;
+          }
+          .pagination-item.on {
+            border: 1px solid #000;
+            background: transparent;
           }
           
         </style>
-        <div class="container" id="js-flex-slider">
+        <div class="container" id="js-flex-slider0">
           <div class="wrap js-flexslider-wrap">
             <div class="js-flexslider-move">
               <div class="item js-flexslider-item">
-                <h1>タイトル No.1</h1>
-                <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+                <h1>--- No.1 ---</h1>
+                <p>slidesPerView: 3.2<br>spaceBetween: 20<br>sp - slidesPerView: 1.1<br>sp - spaceBetween: 10</p>
               </div>
               <div class="item js-flexslider-item">
-                <h1>タイトル No.2</h1>
-                <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+                <h1>--- No.2 ---</h1>
+                <p>slidesPerView: 3.2<br>spaceBetween: 20<br>sp - slidesPerView: 1.1<br>sp - spaceBetween: 10</p>
               </div>
               <div class="item js-flexslider-item">
-                <h1>タイトル No.3</h1>
-                <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+                <h1>--- No.3 ---</h1>
+                <p>slidesPerView: 3.2<br>spaceBetween: 20<br>sp - slidesPerView: 1.1<br>sp - spaceBetween: 10</p>
               </div>
               <div class="item js-flexslider-item">
-                <h1>タイトル No.4</h1>
-                <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+                <h1>--- No.4 ---</h1>
+                <p>slidesPerView: 3.2<br>spaceBetween: 20<br>sp - slidesPerView: 1.1<br>sp - spaceBetween: 10</p>
               </div>
               <div class="item js-flexslider-item">
-                <h1>タイトル No.5</h1>
-                <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+                <h1>--- No.5 ---</h1>
+                <p>slidesPerView: 3.2<br>spaceBetween: 20<br>sp - slidesPerView: 1.1<br>sp - spaceBetween: 10</p>
               </div>
             </div>
             <div class="nav-left js-flexslider-nav-prev"></div>
             <div class="nav-right js-flexslider-nav-next"></div>
+            <div class="pagination js-flexslider-nav-pagination">
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+            </div>
           </div>
         </div>
+        <div id="debug"></div>
+        <div class="container" id="js-flex-slider1">
+          <div class="wrap js-flexslider-wrap">
+            <div class="js-flexslider-move">
+              <div class="item item--border js-flexslider-item">
+                <h1>--- No.1 ---</h1>
+                <p>slidesPerView: 5.0<br>spaceBetween: 0<br>centeredSlides: false<br>sp - slidesPerView: 2.0<br>sp - spaceBetween: 0<br>sp - centeredSlides: false</p>
+              </div>
+              <div class="item item--border js-flexslider-item">
+                <h1>--- No.2 ---</h1>
+                <p>slidesPerView: 5.0<br>spaceBetween: 0<br>centeredSlides: false<br>sp - slidesPerView: 2.0<br>sp - spaceBetween: 0<br>sp - centeredSlides: false</p>
+              </div>
+              <div class="item item--border js-flexslider-item">
+                <h1>--- No.3 ---</h1>
+                <p>slidesPerView: 5.0<br>spaceBetween: 0<br>centeredSlides: false<br>sp - slidesPerView: 2.0<br>sp - spaceBetween: 0<br>sp - centeredSlides: false</p>
+              </div>
+              <div class="item item--border js-flexslider-item">
+                <h1>--- No.4 ---</h1>
+                <p>slidesPerView: 5.0<br>spaceBetween: 0<br>centeredSlides: false<br>sp - slidesPerView: 2.0<br>sp - spaceBetween: 0<br>sp - centeredSlides: false</p>
+              </div>
+              <div class="item item--border js-flexslider-item">
+                <h1>--- No.5 ---</h1>
+                <p>slidesPerView: 5.0<br>spaceBetween: 0<br>centeredSlides: false<br>sp - slidesPerView: 2.0<br>sp - spaceBetween: 0<br>sp - centeredSlides: false</p>
+              </div>
+              <div class="item item--border js-flexslider-item">
+                <h1>--- No.6 ---</h1>
+                <p>slidesPerView: 5.0<br>spaceBetween: 0<br>centeredSlides: false<br>sp - slidesPerView: 2.0<br>sp - spaceBetween: 0<br>sp - centeredSlides: false</p>
+              </div>
+              <div class="item item--border js-flexslider-item">
+                <h1>--- No.7 ---</h1>
+                <p>slidesPerView: 5.0<br>spaceBetween: 0<br>centeredSlides: false<br>sp - slidesPerView: 2.0<br>sp - spaceBetween: 0<br>sp - centeredSlides: false</p>
+              </div>
+              <div class="item item--border js-flexslider-item">
+                <h1>--- No.8 ---</h1>
+                <p>slidesPerView: 5.0<br>spaceBetween: 0<br>centeredSlides: false<br>sp - slidesPerView: 2.0<br>sp - spaceBetween: 0<br>sp - centeredSlides: false</p>
+              </div>
+            </div>
+            <div class="nav-left js-flexslider-nav-prev"></div>
+            <div class="nav-right js-flexslider-nav-next"></div>
+            <div class="pagination js-flexslider-nav-pagination">
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+            </div>
+          </div>
+        </div>
+        <div class="container" id="js-flex-slider2">
+          <div class="wrap js-flexslider-wrap">
+            <div class="js-flexslider-move">
+              <div class="item item--center js-flexslider-item"><a href="#">
+                  <h1>--- No.1 ---</h1>
+                  <p>slidesPerView: 1.1<br>spaceBetween: 40<br>animationTime 700<br>sp - slidesPerView: 1.0<br>sp - spaceBetween: 0</p></a></div>
+              <div class="item item--center js-flexslider-item"><a href="#">
+                  <h1>--- No.2 ---</h1>
+                  <p>slidesPerView: 1.1<br>spaceBetween: 40<br>animationTime 700<br>sp - slidesPerView: 1.0<br>sp - spaceBetween: 0</p></a></div>
+              <div class="item item--center js-flexslider-item"><a href="#">
+                  <h1>--- No.3 ---</h1>
+                  <p>slidesPerView: 1.1<br>spaceBetween: 40<br>animationTime 700<br>sp - slidesPerView: 1.0<br>sp - spaceBetween: 0</p></a></div>
+              <div class="item item--center js-flexslider-item"><a href="#">
+                  <h1>--- No.4 ---</h1>
+                  <p>slidesPerView: 1.1<br>spaceBetween: 40<br>animationTime 700<br>sp - slidesPerView: 1.0<br>sp - spaceBetween: 0</p></a></div>
+            </div>
+            <div class="nav-left js-flexslider-nav-prev"></div>
+            <div class="nav-right js-flexslider-nav-next"></div>
+            <div class="pagination js-flexslider-nav-pagination">
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+              <div class="pagination-item js-flexslider-nav-pagination-item"></div>
+            </div>
+          </div>
+        </div><br><br><br>
         <!-- End to define the main content.-->
       </div>
       <!-- Start to define the global fotter.-->
