@@ -2,7 +2,7 @@ extends ./_layout/_page.pug
 
 block vars
   -
-    var page = data.pages.flexSlider;
+    var page = data.pages.flexSlider1;
 
 block contentFixedBefore
 
@@ -37,12 +37,13 @@ block contentStatic
       text-decoration: none;
     }
     .item h1 {
+      padding-bottom: 20px;
       padding-right: 30px;
       padding-left: 30px;
     }
     .item p {
       padding-right: 30px;
-      padding-bottom: 30px;
+      padding-bottom: 50px;
       padding-left: 30px;
     }
     .item a:hover {
@@ -105,7 +106,6 @@ block contentStatic
       .pagination.js-flexslider-nav-pagination
         - for (var i = 0; i < 5; i++)
           .pagination-item.js-flexslider-nav-pagination-item
-  #debug
 
   .container#js-flex-slider1
     .wrap.js-flexslider-wrap

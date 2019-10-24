@@ -1,11 +1,15 @@
 const easeing = require('../easing');
-import boundRect from '../bound-rect.js';
-
 const Mkai = require('../mkai.js');
+import boundRect from '../bound-rect.js';
 
 import CurrentIndex from './currentIndex.js';
 import SlideOrder from './slideOrder.js';
 import SlideItem from './slideItem.js';
+import MouseEvent from './mouseEvent.js';
+import TouchEvent from './touchEvent.js';
+// import WheelEvent from './wheelEvent.js';
+
+const TOUCH_X_THRESHOLD = 30;
 
 export default class FlexSlider {
   constructor(container, ops = {}) {
@@ -21,6 +25,7 @@ export default class FlexSlider {
       animationEase:    (ops.animationEase === undefined) ? easeing.easeInOutQuad : ops.animationEase,
       autoPlay:         (ops.autoPlay === undefined) ? true : ops.autoPlay,
       autoPlayInterval: (ops.autoPlayInterval === undefined) ? 4 : ops.autoPlayInterval,
+      autoPlayOnMouse: (ops.autoPlayOnMouse === undefined) ? false : ops.autoPlayOnMouse,
     };
 
     if (ops.sp === undefined) ops.sp = {};
@@ -46,13 +51,6 @@ export default class FlexSlider {
     // アニメーション中かどうかのflag
     this.isAnimation = false;
 
-    // マウスイベント中かどうかのflag
-    this.isMouseAnimation = false;
-
-    // タッチイベント中かどうかのflag
-    this.isTouchAnimation = false;
-
-
     // 自動再生の制御
     this.autoPlay = true;
 
@@ -60,24 +58,15 @@ export default class FlexSlider {
 
     this.moveX = 0;
 
-    this.mouseStartX = -1;
-    this.mouseMoveX = -1;
-    this.mouseMoveX0 = 0;
-
-    this.touchStartX = -1;
-    this.touchMoveX = -1;
-    this.touchMoveX0 = 0;
-
     this.wrapElm           = this.container.querySelector('.js-flexslider-wrap');
     this.moveElm           = this.container.querySelector('.js-flexslider-move');
     this.itemElm           = this.container.querySelectorAll('.js-flexslider-item');
     this.navPrevElm        = this.container.querySelector('.js-flexslider-nav-prev');
     this.navNextElm        = this.container.querySelector('.js-flexslider-nav-next');
-    this.paginationElm     = this.container.querySelector('.js-flexslider-nav-pagination');
     this.paginationItemElm = this.container.querySelectorAll('.js-flexslider-nav-pagination-item');
 
     // ページネーションがあるか
-    this.isPagination = (this.paginationElm === null) ? false : true;
+    this.isPagination = (this.paginationItemElm.kength == 0) ? false : true;
 
     // スライド複製
     for (var i = 0; i < this.itemElm.length; i++) {
@@ -109,7 +98,7 @@ export default class FlexSlider {
     this.wrapElm.style.position = 'relative';
 
     // マウスオーバー中は自動再生させない
-    if (window.UserAgent.pc) {
+    if (window.UserAgent.pc && !this.ops.autoPlayOnMouse) {
       this.wrapElm.addEventListener('mouseenter', (e)=> {
         this.autoPlay = false;
       });
@@ -121,13 +110,13 @@ export default class FlexSlider {
     // ナビ イベント
     if (this.navPrevElm) {
       this.navPrevElm.addEventListener('click', ()=> {
-        this.prevItem();
+        this.prevItem(1);
       }, false);
     }
 
     if (this.navNextElm) {
       this.navNextElm.addEventListener('click', ()=> {
-        this.nextItem();
+        this.nextItem(1);
       }, false);
     }
 
@@ -149,140 +138,18 @@ export default class FlexSlider {
     }
 
     // マウスイベント
-    this.wrapElm.addEventListener('mousedown', (e)=> {
-
-      e.preventDefault();
-
-      this.isMouseAnimation = true;
-
-      this.mouseStartX = e.clientX;
-
-    }, false);
-
-    this.wrapElm.addEventListener('mousemove', (e)=> {
-
-      e.preventDefault();
-
-      if (this.isMouseAnimation) {
-        this.mouseMoveX = e.clientX;
-
-        this.mouseMoveX0 = (this.mouseMoveX - this.mouseStartX) * 1.2;
-      }
-
-      if (50 < Math.abs(this.mouseMoveX - this.mouseStartX)) {
-        for (var i = 0; i < this.slideItems.length; i++) {
-          this.slideItems[i].clickEventOff()
-        }
-      }
-
-    }, false);
-
-    this.wrapElm.addEventListener('mouseup', (e)=> {
-
-      e.preventDefault();
-
-      this.isMouseAnimation = false;
-
-      setTimeout(()=> {
-        for (var i = 0; i < this.slideItems.length; i++) {
-          this.slideItems[i].clickEventOn()
-        }
-      }, 50);
-
-      if (this.mouseStartX != -1 && this.mouseMoveX != -1) {
-        if (50 < this.mouseMoveX - this.mouseStartX) {
-          this.prevItem();
-        } else if (this.mouseMoveX - this.mouseStartX < -50) {
-          this.nextItem();
-        } else {
-          this.animationStart(null, 0);
-        }
-      }
-
-      this.mouseStartX = -1;
-      this.mouseMoveX = -1;
-      this.mouseMoveX0 = 0;
-
-      return false;
-
-    }, false);
-
-    this.wrapElm.addEventListener('mouseleave', (e)=> {
-
-      e.preventDefault();
-
-      this.isMouseAnimation = false;
-
-      for (var i = 0; i < this.slideItems.length; i++) {
-        this.slideItems[i].clickEventOn()
-      }
-
-      if (this.mouseStartX != -1 && this.mouseMoveX != -1) {
-        if (30 < this.mouseMoveX - this.mouseStartX) {
-          this.prevItem();
-        } else if (this.mouseMoveX - this.mouseStartX < -30) {
-          this.nextItem();
-        } else {
-          this.animationStart(null, 0);
-        }
-      }
-
-      this.mouseStartX = -1;
-      this.mouseMoveX = -1;
-      this.mouseMoveX0 = 0;
-
-    }, false);
+    this.mouseE = new MouseEvent(this, this.wrapElm, this.slideItems);
 
     // タッチイベント
-    if (window.UserAgent.mobile) {
-      this.wrapElm.addEventListener('touchstart', (e)=> {
+    this.touchE = new TouchEvent(this, this.wrapElm);
 
-        e.preventDefault();
-
-        this.isTouchAnimation = true;
-
-        this.touchStartX = e.touches[0].pageX;
-
-      }, false);
-
-      this.wrapElm.addEventListener('touchmove', (e)=> {
-
-        this.touchMoveX = e.touches[0].pageX;
-
-        const th = Math.abs(this.touchMoveX - this.touchStartX);
-        if (7 <= th) {
-          e.preventDefault();
-        }
-
-        this.touchMoveX0 = (this.touchMoveX - this.touchStartX) * 1.0;
-
-      }, false);
-
-      this.wrapElm.addEventListener('touchend', (e)=> {
-
-        this.isTouchAnimation = false;
-
-        if (this.touchStartX != -1 && this.touchMoveX != -1) {
-          if (30 < this.touchMoveX - this.touchStartX) {
-            this.prevItem();
-          } else if (this.touchMoveX - this.touchStartX < -30) {
-            this.nextItem();
-          } else {
-            this.animationStart(null, 0);
-          }
-        }
-
-        this.touchStartX = -1;
-        this.touchMoveX = -1;
-        this.touchMoveX0 = 0;
-
-      }, false);
-    }
+    // スクロールイベント
+    // this.wheelE = new WheelEvent(this, this.wrapElm);
 
     window.ResizeWatch.register(this);
     window.RenderWatch.register(this);
 
-    this.init();
+    this._init();
 
   }
 
@@ -295,12 +162,12 @@ export default class FlexSlider {
     }
 
     if (!window.UserAgent.mobile) {
-      this.init();
+      this._init();
     }
 
   }
 
-  init() {
+  _init() {
 
     this.containerBR = boundRect(this.container);
 
@@ -329,7 +196,7 @@ export default class FlexSlider {
     this.moveX = 0;
 
     setTimeout(()=> {
-      this.setHeight();
+      this._setHeight();
     }, 100)
 
     // ページネーション初期化
@@ -340,7 +207,7 @@ export default class FlexSlider {
 
   }
 
-  setHeight() {
+  _setHeight() {
 
     let maxH = 0;
     for (var i = 0; i < this.length; i++) {
@@ -352,34 +219,42 @@ export default class FlexSlider {
 
   }
 
-  prevItem() {
+  prevItem(count) {
 
     if (this.isAnimation == true) return;
-    this.isAnimation = true;
 
     // 左端のスライドを右端に移動
-    const leIndex = this.slideOrder.getLeftEdge();
-    const reIndex = this.slideOrder.getRightEdge();
-    const left = this.slideItems[leIndex].getLeft() - this.itemElmW - this.ops.spaceBetween;
-    this.slideItems[reIndex].set(left);
+    for (var i = 0; i < count; i++) {
+      const leIndex = this.slideOrder.getLeftEdge();
+      const reIndex = this.slideOrder.getRightEdge();
+      const left = this.slideItems[leIndex].getLeft() - this.itemElmW - this.ops.spaceBetween;
+      this.slideItems[reIndex].set(left);
 
-    const moveX = this.itemElmW + this.ops.spaceBetween;
+      this.currentIndex.prev();
+      this.slideOrder.prev();
+    }
+
+    const moveX = (this.itemElmW + this.ops.spaceBetween) * count;
     this.animationStart('prev', moveX);
 
   }
 
-  nextItem() {
+  nextItem(count) {
 
     if (this.isAnimation == true) return;
-    this.isAnimation = true;
 
     // 左端のスライドを右端に移動
-    const leIndex = this.slideOrder.getLeftEdge();
-    const reIndex = this.slideOrder.getRightEdge();
-    const left = this.slideItems[reIndex].getLeft() + this.itemElmW + this.ops.spaceBetween;
-    this.slideItems[leIndex].set(left);
+    for (var i = 0; i < count; i++) {
+      const leIndex = this.slideOrder.getLeftEdge();
+      const reIndex = this.slideOrder.getRightEdge();
+      const left = this.slideItems[reIndex].getLeft() + this.itemElmW + this.ops.spaceBetween;
+      this.slideItems[leIndex].set(left);
 
-    const moveX = -(this.itemElmW + this.ops.spaceBetween);
+      this.currentIndex.next();
+      this.slideOrder.next();
+    }
+
+    const moveX = -(this.itemElmW + this.ops.spaceBetween) * count;
     this.animationStart('next', moveX);
 
   }
@@ -390,22 +265,15 @@ export default class FlexSlider {
 
   animationStart(action, moveX) {
 
+    if (this.isAnimation == true) return;
+    this.isAnimation = true;
+
     this.frame = 0;
 
     this.moveElm.style.transitionDuration = `${ this.ops.animationTime }ms`;
 
-    if (action == 'prev') {
-      this.currentIndex.prev();
-      this.slideOrder.prev();
-    } else if (action == 'next') {
-      this.currentIndex.next();
-      this.slideOrder.next();
-    }
-
     if (this.isPagination) {
-      const pIndex = this.currentIndex.getPrevSlideVal();
-      const cIndex = this.currentIndex.getSlideVal();
-      this.chengePagination(pIndex, cIndex);
+      this.chengePagination();
     }
 
     setTimeout(()=> {
@@ -432,14 +300,13 @@ export default class FlexSlider {
 
   }
 
-  chengePagination(rmIndex, adIndex) {
+  chengePagination() {
 
-    const pIndex = this.currentIndex.getPrevSlideVal();
-    const cIndex = this.currentIndex.getSlideVal();
-
-    if (pIndex != null) {
-      this.paginationItemElm[pIndex].classList.remove('on');
+    for (var i = 0; i < this.paginationItemElm.length; i++) {
+      this.paginationItemElm[i].classList.remove('on');
     }
+
+    const cIndex = this.currentIndex.getSlideVal();
     this.paginationItemElm[cIndex].classList.add('on');
 
   }
@@ -452,15 +319,17 @@ export default class FlexSlider {
 
     if (!this.ops.autoPlay) return;
 
-    const x = this.moveX + this.mouseMoveX0 + this.touchMoveX0;
+    // const x = this.moveX + this.mouseE.moveDX + this.touchE.moveDX + this.wheelE.moveDX;
+    const x = this.moveX + this.mouseE.moveDX + this.touchE.moveDX;
     this.moveElm.style.transform = `translate3d(${ x }px, 0, 0)`;
 
     if (!this.autoPlay) return;
-    if (this.isMouseAnimation) return;
-    if (this.isTouchAnimation) return;
+    if (this.mouseE.isAnimation) return;
+    if (this.touchE.isAnimation) return;
+    // if (this.wheelE.isAnimation) return;
 
     if ((this.frame + 1) % (this.opsPc.autoPlayInterval * 60) == 0) {
-      this.nextItem();
+      this.nextItem(1);
     }
     this.frame = this.frame + 1;
 

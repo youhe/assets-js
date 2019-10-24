@@ -37,9 +37,13 @@
       "id": "pageScroll",
       "title": "page-scroll"
     },
-    "flexSlider": {
-      "id": "flexSlider",
-      "title": "flex-slider"
+    "flexSlider1": {
+      "id": "flexSlider1",
+      "title": "flex-slider1"
+    },
+    "flexSlider2": {
+      "id": "flexSlider2",
+      "title": "flex-slider2"
     },
     "touchWatch": {
       "id": "touchWatch",

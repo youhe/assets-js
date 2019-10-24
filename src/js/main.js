@@ -30,8 +30,11 @@ const init = async () => {
     case 'pageScroll':
       require ('./init/page-scroll.js').default();
       break;
-    case 'flexSlider':
-      require ('./init/flex-slider.js').default();
+    case 'flexSlider1':
+      require ('./init/flex-slider1.js').default();
+      break;
+    case 'flexSlider2':
+      require ('./init/flex-slider2.js').default();
       break;
     case 'touchWatch':
       require ('./init/touch-watch.js').default();

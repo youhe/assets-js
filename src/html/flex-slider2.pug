@@ -1,0 +1,103 @@
+extends ./_layout/_page.pug
+
+block vars
+  -
+    var page = data.pages.flexSlider2;
+
+block contentFixedBefore
+
+block contentStatic
+  style.
+    body {
+      overflow-x: hidden;
+      overflow-y: scroll;
+      overscroll-behavior-y: none;
+      text-rendering: optimizeLegibility;
+    }
+    .container {
+      position: relative;
+    }
+    .wrap {
+    }
+    .item {
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background: #ddd;
+      text-align: center;
+    }
+    .item h1 {
+      padding-bottom: 20px;
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+    .item p {
+      padding-right: 30px;
+      padding-bottom: 50px;
+      padding-left: 30px;
+    }
+    .nav-left {
+      position: absolute;
+      left: 15px;
+      top: calc(50% - 18px);
+      border-top: 18px solid transparent;
+      border-bottom: 18px solid transparent;
+      border-right: 24px solid #333;
+      cursor: pointer;
+    }
+    .nav-right {
+      position: absolute;
+      right: 15px;
+      top: calc(50% - 18px);
+      border-top: 18px solid transparent;
+      border-bottom: 18px solid transparent;
+      border-left: 24px solid #333;
+      cursor: pointer;
+    }
+    .pagination {
+      position: absolute;
+      left: 0;
+      bottom: 20px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .pagination-item {
+      box-sizing: border-box;
+      margin: 0 4px;
+      width: 6px;
+      height: 6px;
+      background: #000;
+    }
+    .pagination-item.on {
+      border: 1px solid #000;
+      background: transparent;
+    }
+
+  .container#js-flex-slider0
+    .wrap.js-flexslider-wrap
+      .js-flexslider-move
+        - for (var i = 0; i < 5; i++)
+          .item.js-flexslider-item
+            h1 --- No.#{ i + 1 } ---
+            p
+              |slidesPerView: 1
+              br
+              |spaceBetween: 0
+              br
+              |autoPlayOnMouse: true
+              br
+              |sp - slidesPerView: 1
+              br
+              |sp - spaceBetween: 0
+      .nav-left.js-flexslider-nav-prev
+      .nav-right.js-flexslider-nav-next
+      .pagination.js-flexslider-nav-pagination
+        - for (var i = 0; i < 5; i++)
+          .pagination-item.js-flexslider-nav-pagination-item
+  .cover
+
+block contentFixedAfter
