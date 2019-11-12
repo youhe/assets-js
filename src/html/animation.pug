@@ -1,0 +1,18 @@
+extends ./_layout/_page.pug
+
+block vars
+  -
+    var page = data.pages.animation;
+
+block contentFixedBefore
+
+block contentStatic
+  style.
+    .box {
+      width: 100px;
+      height: 100px;
+      background: #333;
+    }
+  .box#js-box
+
+block contentFixedAfter

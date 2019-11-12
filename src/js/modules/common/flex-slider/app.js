@@ -66,7 +66,7 @@ export default class FlexSlider {
     this.paginationItemElm = this.container.querySelectorAll('.js-flexslider-nav-pagination-item');
 
     // ページネーションがあるか
-    this.isPagination = (this.paginationItemElm.kength == 0) ? false : true;
+    this.isPagination = (this.paginationItemElm.length == 0) ? false : true;
 
     // スライド複製
     for (var i = 0; i < this.itemElm.length; i++) {
@@ -317,12 +317,11 @@ export default class FlexSlider {
 
   render(frame) {
 
-    if (!this.ops.autoPlay) return;
-
     // const x = this.moveX + this.mouseE.moveDX + this.touchE.moveDX + this.wheelE.moveDX;
     const x = this.moveX + this.mouseE.moveDX + this.touchE.moveDX;
     this.moveElm.style.transform = `translate3d(${ x }px, 0, 0)`;
 
+    if (!this.ops.autoPlay) return;
     if (!this.autoPlay) return;
     if (this.mouseE.isAnimation) return;
     if (this.touchE.isAnimation) return;

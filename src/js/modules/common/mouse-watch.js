@@ -18,8 +18,6 @@ class MouseWatch {
     if (!window.UserAgent.pc) return;
 
     document.onmousemove = (e) => {
-      if(this.instances.length === 0) return;
-
       if (!e) e = window.event;
 
       this.x = e.clientX;

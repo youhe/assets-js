@@ -48,6 +48,10 @@
     "touchWatch": {
       "id": "touchWatch",
       "title": "touch-watch"
+    },
+    "animation": {
+      "id": "animation",
+      "title": "animation"
     }
   }
 }

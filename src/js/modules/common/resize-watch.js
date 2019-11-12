@@ -34,7 +34,6 @@ class ResizeWatch {
     window.onresize = () => {
 
       if (this.eventOnlyPc && !window.UserAgent.pc) return;
-      if (this.instances.length === 0) return;
 
       clearTimeout(this.timer);
 
