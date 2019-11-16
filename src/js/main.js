@@ -39,8 +39,8 @@ const init = async () => {
     case 'touchWatch':
       require ('./init/touch-watch.js').default();
       break;
-    case 'animation':
-      require ('./init/animation.js').default();
+    case 'tweenAnimation':
+      require ('./init/tween-animation.js').default();
       break;
   }
 }

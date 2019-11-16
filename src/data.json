@@ -49,9 +49,9 @@
       "id": "touchWatch",
       "title": "touch-watch"
     },
-    "animation": {
-      "id": "animation",
-      "title": "animation"
+    "tweenAnimation": {
+      "id": "tweenAnimation",
+      "title": "tween-animation"
     }
   }
 }

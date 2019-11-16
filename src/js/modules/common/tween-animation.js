@@ -2,7 +2,7 @@ import { log } from 'util';
 
 const Mkai = require('./Mkai');
 
-export default function( duration, easeing, staF, aniF, finF ) {
+export default function( duration, staF, aniF, finF ) {
 
   staF();
   animate( 0, duration * 60 );
@@ -11,8 +11,7 @@ export default function( duration, easeing, staF, aniF, finF ) {
 
     const f = Mkai.constrain(frame / duration, 0.0, 1.0);
 
-    const eF = easeing(f);
-    aniF(eF);
+    aniF(f);
 
     if ( f < 1 ) {
       requestAnimationFrame(() => {
