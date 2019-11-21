@@ -1,4 +1,9 @@
-import { log } from 'util';
+/****************************************************
+
+  - Usage
+  const twAnimation = require('../modules/common/tween-animation').default;
+
+****************************************************/
 
 const Mkai = require('./Mkai');
 
