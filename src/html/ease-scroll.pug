@@ -1,0 +1,60 @@
+extends ./_layout/_page.pug
+
+block vars
+  -
+    var page = data.pages.easeScroll;
+
+block contentFixedBefore
+
+block contentStatic
+  style.
+    .gh {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+    .gh__body-items {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      background-color: #fff;
+    }
+    .gh__body-item {
+      margin: 0 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+  #js-es-body
+    br
+    h1.js-sec(style="text-align: center") scroll. - sec 1 - scroll.
+    |<br><br><br><br><br><br><br><br><br><br>
+    img(src="https://youhe.jp//jiyuchou/img/archives/sphere.png", alt="" width="100%")
+    |<br><br><br><br><br><br><br><br><br><br>
+    h1.js-sec(style="text-align: center") scroll. - sec 2 - scroll.
+    |<br><br><br><br><br><br><br><br><br><br>
+    img(src="https://youhe.jp//jiyuchou/img/archives/sphere.png", alt="" width="100%")
+    |<br><br><br><br><br><br><br><br><br><br>
+    h1.js-sec(style="text-align: center") scroll. - sec 3 - scroll.
+    |<br><br><br><br><br><br><br><br><br><br>
+    img(src="https://youhe.jp//jiyuchou/img/archives/sphere.png", alt="" width="100%")
+    |<br><br><br><br><br><br><br><br><br><br>
+    h1.js-sec(style="text-align: center") scroll. - sec 4 - scroll.
+    |<br><br><br><br><br><br><br><br><br><br>
+    img(src="https://youhe.jp//jiyuchou/img/archives/sphere.png", alt="" width="100%")
+    |<br><br><br><br><br><br><br><br><br><br>
+    h1.js-sec(style="text-align: center") scroll. - sec 5 - scroll.
+
+  //- .gh
+  //-   .gh__body
+  //-     .gh__body-items
+  //-       .gh__body-item.js-nav sec1
+  //-       .gh__body-item.js-nav sec2
+  //-       .gh__body-item.js-nav sec3
+  //-       .gh__body-item.js-nav sec4
+  //-       .gh__body-item.js-nav sec5
+
+block contentFixedAfter
