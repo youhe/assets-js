@@ -15,8 +15,11 @@ export default class EaseScroll {
 
     this.wdY = 0;
     this.wPw = 0;
+
     this.tY = 0;
     this.y = 0;
+    this.nY = 0;
+
     this.maxY = this.bodyBR.height - window.ResizeWatch.height;
     this.maxYHalf = this.maxY * 0.5;
 
@@ -71,6 +74,7 @@ export default class EaseScroll {
     this.tY = Mkai.constrain(this.tY, 0, this.maxY);
 
     this.y += (this.tY - this.y) * 0.3;
+    this.nY = this.y / this.maxY;
 
     this.body.style.transform = `translate3D(0, ${this.y * -1}px, 0)`;
   }
