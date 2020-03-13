@@ -13,6 +13,7 @@ block contentStatic
       left: 0;
       top: 0;
       width: 100%;
+      border-bottom: 1px solid #ccc;
     }
     .gh__body-items {
       display: flex;
@@ -26,6 +27,16 @@ block contentStatic
       padding-bottom: 10px;
       font-size: 18px;
       cursor: pointer;
+    }
+    .scroll-bar {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 5px;
+      height: 100vh;
+      transform: scaleY(0);
+      transform-origin: center top;
+      background-color: #33c;
     }
 
   #js-es-body
@@ -48,13 +59,15 @@ block contentStatic
     |<br><br><br><br><br><br><br><br><br><br>
     h1.js-sec(style="text-align: center") scroll. - sec 5 - scroll.
 
-  //- .gh
-  //-   .gh__body
-  //-     .gh__body-items
-  //-       .gh__body-item.js-nav sec1
-  //-       .gh__body-item.js-nav sec2
-  //-       .gh__body-item.js-nav sec3
-  //-       .gh__body-item.js-nav sec4
-  //-       .gh__body-item.js-nav sec5
+  .gh
+    .gh__body
+      .gh__body-items
+        .gh__body-item.js-nav sec1
+        .gh__body-item.js-nav sec2
+        .gh__body-item.js-nav sec3
+        .gh__body-item.js-nav sec4
+        .gh__body-item.js-nav sec5
+
+  .scroll-bar#js-scroll-bar
 
 block contentFixedAfter

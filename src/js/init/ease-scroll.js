@@ -3,9 +3,10 @@ require("../modules/common/resize-watch");
 require("../modules/common/render-watch");
 
 import EaseScroll from "../modules/common/ease-scroll/app.js";
+import boundRect from "../modules/common/bound-rect.js";
 
 export default function() {
-  const easeScroll = new EaseScroll();
+  const eScroll = new EaseScroll();
 
   const nav = document.querySelectorAll(".js-nav");
   const sec = document.querySelectorAll(".js-sec");
@@ -15,9 +16,16 @@ export default function() {
       "click",
       e => {
         const index = e.currentTarget.index;
-        easeScroll.move(sec[index]);
+        const br = boundRect(sec[index]);
+        eScroll.move(br.fixTop - 40);
       },
       false
     );
   }
+
+  const scrollBar = document.getElementById("js-scroll-bar");
+  this.render = () => {
+    scrollBar.style.transform = `scaleY(${eScroll.nY})`;
+  };
+  window.RenderWatch.register(this);
 }
