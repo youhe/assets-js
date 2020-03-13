@@ -4,14 +4,23 @@
   require('./modules/common/render-watch');
 
 ****************************************************/
+import * as Stats from "./stats.js";
+
+const FPS60 = [1, 1, 1, 1, 1, 1];
+const FPS30 = [1, 0, 1, 0, 1, 0];
+const FPS10 = [1, 0, 0, 0, 0, 0];
 
 class RenderWatch {
   constructor() {
     this.instances = [];
 
     this.working = true;
-    this.fps = 60;
+    this.fps = FPS60;
     this.frame = 0;
+
+    this.isStats = true;
+    this.stats = new Stats();
+    document.body.appendChild(this.stats.dom);
 
     this.start();
   }
@@ -34,36 +43,32 @@ class RenderWatch {
     this.frame = 0;
   }
 
-  setFps30() {
-    this.fps = 30;
-  }
-
-  setFps60() {
-    this.fps = 60;
+  setFps(val) {
+    if (val == 60) this.fps = FPS60;
+    if (val == 30) this.fps = FPS30;
+    if (val == 10) this.fps = FPS10;
   }
 
   render() {
     if (this.working === false) return;
 
-    if (this.fps == 60) {
+    requestAnimationFrame(() => {
+      this.render();
+    });
+
+    this.stats.begin();
+
+    if (this.fps[this.frame % 6] == 1) {
       for (var i = 0; i < this.instances.length; i++) {
         if (this.instances[i].RenderWatchWorking === true) {
           this.instances[i].render(this.frame);
-        }
-      }
-    } else if (this.fps == 30 && this.frame % 2 == 0) {
-      for (var i = 0; i < this.instances.length; i++) {
-        if (this.instances[i].RenderWatchWorking === true) {
-          this.instances[i].render(this.frame * 0.5);
         }
       }
     }
 
     this.frame = this.frame + 1;
 
-    requestAnimationFrame(() => {
-      this.render();
-    });
+    this.stats.end();
   }
 }
 
