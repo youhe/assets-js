@@ -45,6 +45,9 @@ const init = async () => {
     case "easeScroll":
       require("./init/ease-scroll.js").default();
       break;
+    case "checkDev":
+      require("./init/check-dev.js").default();
+      break;
   }
 };
 init();
