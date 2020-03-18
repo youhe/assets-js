@@ -18,68 +18,50 @@
 
 ****************************************************/
 
-const Mkai = require('./mkai');
+const Mkai = require("./mkai");
 
 class ResizeWatch {
-
   constructor() {
+    this._eventOnlyPc = false;
+    this._intervalTime = 100;
 
-    this.eventOnlyPc = false;
-    this.intervalTime = 100;
+    this._instances = [];
 
-    this.instances = [];
-
-    this.resize();
+    this._resize();
 
     window.onresize = () => {
+      if (this._eventOnlyPc && !window.UserAgent.pc) return;
 
-      if (this.eventOnlyPc && !window.UserAgent.pc) return;
+      clearTimeout(this._timer);
 
-      clearTimeout(this.timer);
-
-      this.timer = setTimeout(()=> {
-        this.resize();
-      }, this.intervalTime);
-
+      this._timer = setTimeout(() => {
+        this._resize();
+      }, this._intervalTime);
     };
-
   }
 
-
-  resize() {
-
+  _resize() {
     this.width = document.body.clientWidth;
     this.height = window.innerHeight;
     this.aspect = Mkai.round(this.width / this.height, 0.0001);
 
-    for(var i = 0; i < this.instances.length; i++) {
-      this.instances[i].resize();
+    for (var i = 0; i < this._instances.length; i++) {
+      this._instances[i].resize();
     }
-
   }
-
 
   register(instance) {
-
-    this.instances.push(instance);
+    this._instances.push(instance);
     instance.resize();
-
   }
-
 
   setEventOnlyPc() {
-
-    this.eventOnlyPc = true;
-
+    this._eventOnlyPc = true;
   }
-
 
   setEventAll() {
-
-    this.eventOnlyPc = false;
-
+    this._eventOnlyPc = false;
   }
-
 }
 
 window.ResizeWatch = new ResizeWatch();

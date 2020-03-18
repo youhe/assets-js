@@ -7,61 +7,68 @@
 
 export default class ModalFixed {
   constructor(modal, open, close) {
-    this.windowPageY = 0;
+    this._windowPageY = 0;
 
-    this.body = document.body;
-    this.modal = modal;
+    this._body = document.body;
+    this._modal = modal;
 
-    this.init();
+    this._init();
 
     for (var i = 0; i < open.length; i++) {
-      open[i].addEventListener('click', (e)=> {
-        this.open();
-      }, false);
+      open[i].addEventListener(
+        "click",
+        e => {
+          this._open();
+        },
+        false
+      );
     }
     for (var i = 0; i < close.length; i++) {
-      close[i].addEventListener('click', (e)=> {
-        this.close();
-      }, false);
+      close[i].addEventListener(
+        "click",
+        e => {
+          this._close();
+        },
+        false
+      );
     }
   }
 
-  init() {
-    this.modal.style.position = 'fixed';
-    this.modal.style.left = 0;
-    this.modal.style.top = 0;
-    this.modal.style.width = '100%';
-    this.modal.style.height = '100%';
+  _init() {
+    this._modal.style.position = "fixed";
+    this._modal.style.left = 0;
+    this._modal.style.top = 0;
+    this._modal.style.width = "100%";
+    this._modal.style.height = "100%";
   }
 
-  open() {
-    this.windowPageY = window.pageYOffset;
-    this.modal.classList.add('on');
-    this.body.style.position = 'fixed';
-    this.body.style.overflow = 'hidden';
-    this.body.style.top = 0;
-    this.body.style.left = 0;
-    this.body.style.bottom = 0;
-    this.body.style.right = 0;
-    this.body.style.marginTop = this.windowPageY * -1 + 'px';
+  _open() {
+    this._windowPageY = window.pageYOffset;
+    this._modal.classList.add("on");
+    this._body.style.position = "fixed";
+    this._body.style.overflow = "hidden";
+    this._body.style.top = 0;
+    this._body.style.left = 0;
+    this._body.style.bottom = 0;
+    this._body.style.right = 0;
+    this._body.style.marginTop = this._windowPageY * -1 + "px";
   }
 
-  close() {
-    this.modal.classList.remove('on');
-    setTimeout(()=> {
-      this.body.style.position = 'static';
-      this.body.style.overflow = '';
-      this.body.style.top = 'auto';
-      this.body.style.left = 'auto';
-      this.body.style.bottom = 'auto';
-      this.body.style.right = 'auto';
-      this.body.style.marginTop = 0;
-      scrollTo(0, this.windowPageY);
+  _close() {
+    this._modal.classList.remove("on");
+    setTimeout(() => {
+      this._body.style.position = "static";
+      this._body.style.overflow = "";
+      this._body.style.top = "auto";
+      this._body.style.left = "auto";
+      this._body.style.bottom = "auto";
+      this._body.style.right = "auto";
+      this._body.style.marginTop = 0;
+      scrollTo(0, this._windowPageY);
 
       // コンテンツの中身をTOPnい戻す
       // const wrap = document.getElementById('js-modal-wrap');
       // wrap.scrollTo(0, 0);
-
     }, 100);
   }
 }

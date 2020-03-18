@@ -1,73 +1,60 @@
 export default class Accordion {
-
   constructor(elm) {
+    this._open = elm.querySelector(".js-accordion-open");
+    this._contents = elm.querySelector(".js-accordion-contents");
+    this._contentsWrap = elm.querySelector(".js-accordion-contents-wrap");
 
-    this.elm = elm;
-    this.open = this.elm.querySelector('.js-accordion-open');
-    this.contents = this.elm.querySelector('.js-accordion-contents');
-    this.contentsWrap = this.elm.querySelector('.js-accordion-contents-wrap');
+    this._contents.style.height = 0;
+    this._contents.style.overflow = "hidden";
+    this._contents.style.transition = "height .3s ease 0s";
 
-    this.contents.style.height = 0;
-    this.contents.style.overflow = 'hidden';
-    this.contents.style.transition = 'height .3s ease 0s';
+    this._isAnimate = false;
 
-    this.isOpened = false;
-    this.isAnimate = false;
-
-    this.addEvent();
-
+    this._addEvent();
   }
 
-  addEvent() {
-
-    this.open.addEventListener('click', () => {
-      if (this.isAnimate) return;
-      this.isAnimate = true;
-      setTimeout(()=> {
-        this.isAnimate = false;
-      }, 400);
-      this.toggle();
-    }, false);
-
+  _addEvent() {
+    this._open.addEventListener(
+      "click",
+      () => {
+        if (this._isAnimate) return;
+        this._isAnimate = true;
+        setTimeout(() => {
+          this._isAnimate = false;
+        }, 400);
+        this._toggle();
+      },
+      false
+    );
   }
 
-  toggle() {
-
-    if (this.contents.classList.contains('on')) {
-
+  _toggle() {
+    if (this._contents.classList.contains("on")) {
       // off
-      this.open.classList.remove('on');
-      this.contents.classList.remove('on');
-      this.contents.style.height = this.getContentsHeight();
-      setTimeout(()=> {
-        this.contents.style.willChange = 'height';
-        this.contents.style.height = 0;
+      this._open.classList.remove("on");
+      this._contents.classList.remove("on");
+      this._contents.style.height = this._getContentsHeight();
+      setTimeout(() => {
+        this._contents.style.willChange = "height";
+        this._contents.style.height = 0;
       }, 100);
-      setTimeout(()=> {
-        this.contents.style.willChange = '';
+      setTimeout(() => {
+        this._contents.style.willChange = "";
       }, 500);
-
     } else {
-
       // on
-      this.open.classList.add('on');
-      this.contents.classList.add('on');
-      this.contents.style.willChange = 'height';
-      this.contents.style.height = this.getContentsHeight();
-      setTimeout(()=> {
-        this.contents.style.height = 'auto';
-        this.contents.style.willChange = '';
+      this._open.classList.add("on");
+      this._contents.classList.add("on");
+      this._contents.style.willChange = "height";
+      this._contents.style.height = this._getContentsHeight();
+      setTimeout(() => {
+        this._contents.style.height = "auto";
+        this._contents.style.willChange = "";
       }, 400);
-
     }
-
   }
 
-  getContentsHeight() {
-
-    const contentsHeight = this.contentsWrap.getBoundingClientRect().height;
-    return contentsHeight + 'px';
-
+  _getContentsHeight() {
+    return `${this._contentsWrap.getBoundingClientRect().height}px`;
   }
-
 }

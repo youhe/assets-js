@@ -40,12 +40,12 @@ class RenderWatch {
   }
 
   setDev(pos) {
-    this.stats = new Stats();
+    this._stats = new Stats();
     if (pos == "right") {
-      this.stats.dom.style.left = "auto";
-      this.stats.dom.style.right = 0;
+      this._stats.dom.style.left = "auto";
+      this._stats.dom.style.right = 0;
     }
-    document.body.appendChild(this.stats.dom);
+    document.body.appendChild(this._stats.dom);
     this._render = this._devRender;
   }
 
@@ -82,7 +82,7 @@ class RenderWatch {
     this._frame = this._frame + 1;
     if (this._fps[this._frame % 6] == 0) return;
 
-    this.stats.begin();
+    this._stats.begin();
 
     for (var i = 0; i < this._instances.length; i++) {
       if (this._instances[i].RenderWatchWorking === true) {
@@ -90,7 +90,7 @@ class RenderWatch {
       }
     }
 
-    this.stats.end();
+    this._stats.end();
   }
 }
 

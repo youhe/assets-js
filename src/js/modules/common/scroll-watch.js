@@ -8,19 +8,19 @@ const Mkai = require("./mkai");
 
 class ScrollWatch {
   constructor() {
-    this.instances = [];
+    this._instances = [];
 
     this.x = window.pageXOffset;
     this.y = window.pageYOffset;
     this.nX = 0;
     this.nY = 0;
 
-    this.bodyBR = boundRect(document.body);
-    this.scroll();
+    this._bodyBR = boundRect(document.body);
+    this._scroll();
 
     setTimeout(() => {
-      this.bodyBR = boundRect(document.body);
-      this.scroll();
+      this._bodyBR = boundRect(document.body);
+      this._scroll();
     }, 1000);
 
     window.ResizeWatch.register(this);
@@ -28,31 +28,31 @@ class ScrollWatch {
     window.addEventListener(
       "scroll",
       e => {
-        this.scroll();
+        this._scroll();
       },
       false
     );
   }
 
-  scroll() {
+  _scroll() {
     this.x = window.pageXOffset;
     this.y = window.pageYOffset;
-    this.nX = this.x / (this.bodyBR.width - window.innerWidth);
-    this.nY = this.y / (this.bodyBR.height - window.innerHeight);
+    this.nX = this.x / (this._bodyBR.width - window.innerWidth);
+    this.nY = this.y / (this._bodyBR.height - window.innerHeight);
     this.nX = Mkai.constrain(this.nX, 0.0, 1.0);
     this.nY = Mkai.constrain(this.nY, 0.0, 1.0);
 
-    for (var i = 0, l = this.instances.length; i < l; i++) {
-      this.instances[i].scroll();
+    for (var i = 0, l = this._instances.length; i < l; i++) {
+      this._instances[i].scroll();
     }
   }
 
   resize() {
-    this.bodyBR = boundRect(document.body);
+    this._bodyBR = boundRect(document.body);
   }
 
   register(instance) {
-    this.instances.push(instance);
+    this._instances.push(instance);
   }
 }
 
