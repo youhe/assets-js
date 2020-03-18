@@ -1,10 +1,10 @@
-require('../modules/common/render-watch');
+require("../modules/common/render-watch");
+window.RenderWatch.setDev("right");
 
 export default function() {
-
   class Hoge {
-    render() {
-      console.log(window.RenderWatch.frame);
+    render(frame) {
+      console.log(`render ${frame}`);
     }
     start() {
       this.RenderWatchWorking = true;
@@ -17,24 +17,52 @@ export default function() {
   const hoge = new Hoge();
   window.RenderWatch.register(hoge);
 
-  const btn1 = document.getElementById('js-btn1');
-  btn1.addEventListener('click', ()=> {
-    window.RenderWatch.setFps30();
-  }, false);
+  const btn1 = document.getElementById("js-btn1");
+  const btn2 = document.getElementById("js-btn2");
+  const btn3 = document.getElementById("js-btn3");
+  const btn4 = document.getElementById("js-btn4");
+  const btn5 = document.getElementById("js-btn5");
 
-  const btn2 = document.getElementById('js-btn2');
-  btn2.addEventListener('click', ()=> {
-    window.RenderWatch.setFps60();
-  }, false);
+  btn1.addEventListener(
+    "click",
+    () => {
+      console.log("setFps 10");
+      window.RenderWatch.setFps(10);
+    },
+    false
+  );
 
-  const btn3 = document.getElementById('js-btn3');
-  btn3.addEventListener('click', ()=> {
-    hoge.start();
-  }, false);
+  btn2.addEventListener(
+    "click",
+    () => {
+      console.log("setFps 30");
+      window.RenderWatch.setFps(30);
+    },
+    false
+  );
 
-  const btn4 = document.getElementById('js-btn4');
-  btn4.addEventListener('click', ()=> {
-    hoge.stop();
-  }, false);
+  btn3.addEventListener(
+    "click",
+    () => {
+      console.log("setFps 60");
+      window.RenderWatch.setFps(60);
+    },
+    false
+  );
 
-};
+  btn4.addEventListener(
+    "click",
+    () => {
+      hoge.start();
+    },
+    false
+  );
+
+  btn5.addEventListener(
+    "click",
+    () => {
+      hoge.stop();
+    },
+    false
+  );
+}
