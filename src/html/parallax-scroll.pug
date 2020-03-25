@@ -1,0 +1,109 @@
+extends ./_layout/_page.pug
+
+block vars
+  -
+    var page = data.pages.parallaxScroll;
+
+block contentFixedBefore
+
+block contentStatic
+  style.
+    .title {
+      margin: 88px auto 0;
+      width: 80%;
+      font-size: 46px;
+      font-weight: bold;
+      line-height: 1;
+    }
+    .items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 0 auto;
+      width: 80%;
+    }
+    .item {
+      margin-top: 147px;
+      width: 28%;
+    }
+    .item-img img {
+      width: 100%;
+    }
+    .item-title {
+      font-size: 20px;
+    }
+    .item-p {
+      font-size: 14px;
+      line-height: 1.2;
+    }
+    .info {
+      margin: 0 auto;
+      padding-top: 143px;
+      padding-bottom: 147px;
+      width: 80%;
+    }
+    .info-title {
+      font-size: 32px;
+      font-weight: bold;
+      line-height: 1;
+    }
+    .info-year {
+      margin-top: 40px;
+      font-size: 14px;
+      line-height: 1;
+    }
+    .info-p {
+      margin-top: 40px;
+      font-size: 16px;
+      line-height: 1.2;
+    }
+    .dev-line {
+      position: fixed;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 1px;
+      background-color: #0f0;
+    }
+
+  .title.js-prl-item Lorem ipsum
+  .items
+    - for(var i = 0; i < 5; i++)
+      .item.js-prl-item
+        .item-img
+          img(src="/img/thum.png", alt="")
+        .item-title TITLE_TITLE_TITLE
+        .item-p
+          |text text text text text text text text
+          |text text text text text text text text
+          |text text text text text text text text
+          |text text text text text text text text
+      .item.js-prl-item.item
+        .item-img
+          img(src="/img/thum.png", alt="")
+        .item-title TITLE_TITLE_TITLE
+        .item-p
+          |text text text text text text text text
+          |text text text text text text text text
+          |text text text text text text text text
+          |text text text text text text text text
+      .item.js-prl-item
+        .item-img
+          img(src="/img/thum.png", alt="")
+        .item-title TITLE_TITLE_TITLE
+        .item-p
+          |text text text text text text text text
+          |text text text text text text text text
+          |text text text text text text text text
+          |text text text text text text text text
+
+
+  .info
+    .info-title.js-prl-item Lorem ipsum
+    .info-year.js-prl-item 1960 ~ 2020
+    .info-p.js-prl-item
+      |Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  .dev-line
+
+
+block contentFixedAfter

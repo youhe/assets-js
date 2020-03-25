@@ -48,6 +48,9 @@ const init = async () => {
     case "checkDev":
       require("./init/check-dev.js").default();
       break;
+    case "parallaxScroll":
+      require("./init/parallax-scroll.js").default();
+      break;
   }
 };
 init();

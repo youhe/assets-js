@@ -60,6 +60,10 @@
     "checkDev": {
       "id": "checkDev",
       "title": "check-dev"
+    },
+    "parallaxScroll": {
+      "id": "parallaxScroll",
+      "title": "parallax-scroll"
     }
   }
 }

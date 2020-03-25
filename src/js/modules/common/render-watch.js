@@ -11,7 +11,7 @@ const FPS30 = [1, 0, 1, 0, 1, 0];
 const FPS10 = [1, 0, 0, 0, 0, 0];
 
 class RenderWatch {
-  constructor(mode) {
+  constructor() {
     this._instances = [];
 
     this.working = true;
