@@ -1,5 +1,4 @@
 require("../modules/common/render-watch");
-window.RenderWatch.setDev("right");
 
 export default function() {
   class Hoge {

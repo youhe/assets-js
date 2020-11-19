@@ -4,8 +4,6 @@
   require('./modules/common/render-watch');
 
 ****************************************************/
-import * as Stats from "./stats.js";
-
 const FPS60 = [1, 1, 1, 1, 1, 1];
 const FPS30 = [1, 0, 1, 0, 1, 0];
 const FPS10 = [1, 0, 0, 0, 0, 0];
@@ -39,20 +37,11 @@ class RenderWatch {
     this._frame = 0;
   }
 
-  setDev(pos) {
-    this._stats = new Stats();
-    if (pos == "right") {
-      this._stats.dom.style.left = "auto";
-      this._stats.dom.style.right = 0;
-    }
-    document.body.appendChild(this._stats.dom);
-    this._render = this._devRender;
-  }
-
   setFps(val) {
     if (val == 60) this._fps = FPS60;
-    if (val == 30) this._fps = FPS30;
-    if (val == 10) this._fps = FPS10;
+    else if (val == 30) this._fps = FPS30;
+    else if (val == 10) this._fps = FPS10;
+    else console.error('not found FPS.')
   }
 
   _render() {
@@ -70,27 +59,6 @@ class RenderWatch {
         this._instances[i].render(this._frame);
       }
     }
-  }
-
-  _devRender() {
-    if (this.working === false) return;
-
-    requestAnimationFrame(() => {
-      this._render();
-    });
-
-    this._frame = this._frame + 1;
-    if (this._fps[this._frame % 6] == 0) return;
-
-    this._stats.begin();
-
-    for (var i = 0; i < this._instances.length; i++) {
-      if (this._instances[i].RenderWatchWorking === true) {
-        this._instances[i].render(this._frame);
-      }
-    }
-
-    this._stats.end();
   }
 }
 
