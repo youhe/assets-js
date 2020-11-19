@@ -7,6 +7,5 @@ import ParallaxScroll from "../modules/common/parallax-scroll/index.js";
 
 export default function() {
   window.RenderWatch.setFps(30);
-  window.RenderWatch.setDev();
   new ParallaxScroll();
 }
