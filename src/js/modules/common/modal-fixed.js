@@ -6,11 +6,13 @@
 ****************************************************/
 
 export default class ModalFixed {
-  constructor(modal, open, close) {
+  constructor(modal, open, close, {modalInner = null, closeTime = 100}) {
     this._windowPageY = 0;
 
     this._body = document.body;
     this._modal = modal;
+    this._modalInnerScroll = modalInner;
+    this._closeTime = closeTime;
 
     this._init();
 
@@ -51,7 +53,7 @@ export default class ModalFixed {
     this._body.style.left = 0;
     this._body.style.bottom = 0;
     this._body.style.right = 0;
-    this._body.style.marginTop = this._windowPageY * -1 + "px";
+    this._body.style.marginTop = `${this._windowPageY * -1}px`;
   }
 
   _close() {
@@ -66,9 +68,10 @@ export default class ModalFixed {
       this._body.style.marginTop = 0;
       scrollTo(0, this._windowPageY);
 
-      // コンテンツの中身をTOPnい戻す
-      // const wrap = document.getElementById('js-modal-wrap');
-      // wrap.scrollTo(0, 0);
-    }, 100);
+      // モーダルのの中身をTOPに戻す
+      if (this._modalInnerScroll != null) {
+        this._modalInnerScroll.scrollTo(0, 0);
+      }
+    }, this._closeTime);
   }
 }
