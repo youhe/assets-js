@@ -45,8 +45,8 @@ const init = async () => {
     case "easeScroll":
       require("./init/ease-scroll.js").default();
       break;
-    case "checkDev":
-      require("./init/check-dev.js").default();
+    case "devmode":
+      require("./init/devmode.js").default();
       break;
     case "parallaxScroll":
       require("./init/parallax-scroll.js").default();

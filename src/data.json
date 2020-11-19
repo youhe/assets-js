@@ -57,9 +57,9 @@
       "id": "easeScroll",
       "title": "ease-scroll"
     },
-    "checkDev": {
-      "id": "checkDev",
-      "title": "check-dev"
+    "devmode": {
+      "id": "devmode",
+      "title": "devmode"
     },
     "parallaxScroll": {
       "id": "parallaxScroll",

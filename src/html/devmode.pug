@@ -1,0 +1,27 @@
+extends ./_layout/_page.pug
+
+block vars
+  -
+    var page = data.pages.devmode;
+
+block contentFixedBefore
+
+block contentStatic
+  h2
+    |DEV MODE:&nbsp;&nbsp;
+    span#js-dev
+  h2
+    |PRM:&nbsp;&nbsp;
+    span#js-dev-prm
+  br
+  ul
+    li
+      a(href="./devmode.html?devmode=on") DEVMODE ON
+    li
+      a(href="./devmode.html") DEVMODE OFF
+    li
+      a(href="./devmode.html?hoge=1") Add PRM hoge=1
+    li
+      a(href="./devmode.html?hoge=1&fuga=2") Add PRM hoge=1&fuga=2
+
+block contentFixedAfter
